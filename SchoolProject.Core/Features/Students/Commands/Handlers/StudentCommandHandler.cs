@@ -23,7 +23,7 @@ namespace SchoolProject.Core.Features.Students.Commands.Handlers
 
 
         #region Constructors
-        public StudentCommandHandler(StudentServies studentServies, IMapper mapper)
+        public StudentCommandHandler(IStudentServies studentServies, IMapper mapper)
         {
             _studentServies = studentServies;
             _mapper = mapper;
