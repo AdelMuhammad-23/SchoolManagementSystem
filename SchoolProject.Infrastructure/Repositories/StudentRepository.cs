@@ -22,6 +22,8 @@ namespace SchoolProject.Infrastructure.Repositories
         {
             _studnts = dbContext.Set<Student>();
         }
+
+       
         #endregion
 
         #region Handel Functions

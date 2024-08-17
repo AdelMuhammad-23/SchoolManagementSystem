@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SchoolProject.Core.Mapping.StudentMapping
 {
-    public partial class StudentProfile : Profile
+    public partial class StudentProfile 
     {
         public void AddStudentMapping()
         {

@@ -13,8 +13,9 @@ using System.Threading.Tasks;
 
 namespace SchoolProject.Core.Features.Students.Commands.Handlers
 {
-    public class StudentCommandHandler : ResponsesHandler,
-                                        IRequestHandler<AddStudentCommand, Responses<string>>
+    public class StudentCommandHandler :ResponsesHandler,
+        IRequestHandler<AddStudentCommand, Responses<string>>
+    
     {
         #region Fields
         private readonly IStudentServies _studentServies;
@@ -23,8 +24,9 @@ namespace SchoolProject.Core.Features.Students.Commands.Handlers
 
 
         #region Constructors
-        public StudentCommandHandler(StudentServies studentServies, IMapper mapper)
+        public StudentCommandHandler(IStudentServies studentServies, IMapper mapper)
         {
+        
             _studentServies = studentServies;
             _mapper = mapper;
         }
@@ -34,15 +36,12 @@ namespace SchoolProject.Core.Features.Students.Commands.Handlers
         #region Handel Functions
         public async Task<Responses<string>> Handle(AddStudentCommand request, CancellationToken cancellationToken)
         {
-            //mapping Between request and student
-            var studentmapper = _mapper.Map<Student>(request);
-            //add
-            var result = await _studentServies.AddStudentAsync(studentmapper);
-            //return response
-            if (result == "Success") return Created("ADD Successfuly");
-            else return BadRequest<string>();
-            #endregion
-
+            var student = _mapper.Map<Student>(request);
+            var result = await _studentServies.AddAsync(student);
+            return result == "Exist" ? UnprocessableEntity<string>("Name already exists") :
+                   result == "Success" ? Created("Added successfully") :
+                                         BadRequest<string>();
         }
+        #endregion
     }
 }

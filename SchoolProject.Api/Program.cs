@@ -1,11 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using SchoolProject.Infrastructure.Abstracts;
-using SchoolProject.Infrastructure.Repositories;
-using SchoolProject.Infrastructure.Data;
-using SchoolProject.Infrastructure;
-using SchoolProject.Servies;
 using SchoolProject.Core;
+using SchoolProject.Core.MiddleWare;
+using SchoolProject.Infrastructure;
+using SchoolProject.Infrastructure.Data;
+using SchoolProject.Servies;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +22,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 option.UseSqlServer(ConnectionString)
 );
 #endregion
+
 #region DependencyInjection
 builder.Services.AddInfrastructureDependencis()
     .AddServiesDependencis()
@@ -38,6 +37,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+//Register mu MiddleWare
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 

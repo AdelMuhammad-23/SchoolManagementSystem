@@ -13,6 +13,7 @@ namespace SchoolProject.Infrastructure
     {
         public static IServiceCollection AddInfrastructureDependencis(this IServiceCollection services)
         {
+
             services.AddTransient<IStudentRepository, StudentRepository>();
             return services;
         }

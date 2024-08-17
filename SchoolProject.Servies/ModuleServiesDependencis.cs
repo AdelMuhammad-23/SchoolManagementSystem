@@ -10,6 +10,7 @@ namespace SchoolProject.Servies
         public static IServiceCollection AddServiesDependencis(this IServiceCollection services)
         {
             {
+
                 services.AddTransient<IStudentServies, StudentServies>();
                 return services;
             }

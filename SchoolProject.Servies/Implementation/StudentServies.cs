@@ -2,11 +2,6 @@
 using SchoolProject.Data.Entities;
 using SchoolProject.Infrastructure.Abstracts;
 using SchoolProject.Servies.Abstructs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolProject.Servies.Implementation
 {
@@ -14,15 +9,15 @@ namespace SchoolProject.Servies.Implementation
     {
         #region Fields
         public readonly IStudentRepository _studentRepository;
-            #endregion
-            
+        #endregion
+
         #region Constructor
-           public StudentServies(IStudentRepository studentRepository)
+        public StudentServies(IStudentRepository studentRepository)
         {
             _studentRepository = studentRepository;
         }
 
-       
+
         #endregion
 
         #region Handel Functions
@@ -33,21 +28,31 @@ namespace SchoolProject.Servies.Implementation
         public async Task<Student> GetStudentByIdAsync(int id)
         {
             var student = _studentRepository.GetTableNoTracking()
-                                            .Include(x=> x.Department)
-                                            .Where(x=>x.StudID.Equals(id))
+                                            .Include(x => x.Department)
+                                            .Where(x => x.StudID.Equals(id))
                                             .FirstOrDefault();
             return student;
         }
 
-        public async Task<string> AddStudentAsync(Student student)
+        public async Task<string> AddAsync(Student student)
         {
-            //Check if the name is Exist or not
-           var studenName = _studentRepository.GetTableAsTracking().Where(st=>st.Name.Equals(student.Name)).FirstOrDefault();
-            if (studenName != null) return "Exist";
+
             //Added Student
             await _studentRepository.AddAsync(student);
             return "Success";
 
+        }
+
+        public async Task<bool> IsNameExist(string name)
+        {
+            //Check if the name is Exist or not
+            var studentName = _studentRepository.GetTableNoTracking()
+                                                .Where(st => st.Name.Equals(name))
+                                                .FirstOrDefault();
+            if (studentName == null)
+                return false;
+
+            return true;
         }
         #endregion
     }

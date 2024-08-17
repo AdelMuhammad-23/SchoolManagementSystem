@@ -43,7 +43,6 @@ namespace SchoolProject.Infrastructure.InfrastructureBases
             return _dbContext.Set<T>().AsNoTracking().AsQueryable();
         }
 
-
         
         
         public virtual async Task AddRangeAsync(ICollection<T> entities)
