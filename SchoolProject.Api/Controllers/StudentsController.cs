@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using SchoolProject.Api.Base;
 using SchoolProject.Core.Features.Students.Commands.Models;
 using SchoolProject.Core.Features.Students.Queries.Models;
@@ -14,7 +17,7 @@ namespace SchoolProject.Api.Controllers
         {
             return NewResult(await Mediator.Send(new GetStudentListQuery()));
         }
-
+        
         [HttpGet(Router.StudentRouting.GetById)]
         public async Task<IActionResult> GetStudentByIdAsync([FromRoute] int id)
         {
@@ -25,19 +28,6 @@ namespace SchoolProject.Api.Controllers
         public async Task<IActionResult> Create([FromBody] AddStudentCommand command)
         {
             return NewResult(await Mediator.Send(command));
-        }
-
-
-        [HttpPut(Router.StudentRouting.Update)]
-        public async Task<IActionResult> Update([FromBody] EditStudentCommand command)
-        {
-            return NewResult(await Mediator.Send(command));
-        }
-
-        [HttpDelete(Router.StudentRouting.Delete)]
-        public async Task<IActionResult> Delete([FromRoute] int id)
-        {
-            return NewResult(await Mediator.Send(new DeleteStudentCommand(id)));
         }
     }
 }
