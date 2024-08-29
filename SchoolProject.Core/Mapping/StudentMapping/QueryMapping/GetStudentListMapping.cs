@@ -1,10 +1,5 @@
 ﻿using SchoolProject.Core.Features.Students.Queries.Response;
 using SchoolProject.Data.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolProject.Core.Mapping.StudentMapping
 {
@@ -12,9 +7,10 @@ namespace SchoolProject.Core.Mapping.StudentMapping
     {
         public void GetStudentListMapping()
         {
-            CreateMap<Student, GetStudentListResponse>()
-                .ForMember(dest => dest.DepartmentName, src => src.MapFrom(dep => dep.Department.DName));
-        
+            CreateMap<Student, GetSingleStudentResponse>()
+           .ForMember(dest => dest.DepartmentName, src => src.MapFrom(dep => dep.GetLocalized(dep.Department.DNameAr, dep.Department.DNameEn)))
+           .ForMember(dest => dest.Name, src => src.MapFrom(src => src.GetLocalized(src.NameAr, src.NameEn)));
+
         }
 
 

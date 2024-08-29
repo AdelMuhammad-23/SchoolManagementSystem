@@ -57,7 +57,7 @@ namespace SchoolProject.Servies.Implementation
         {
             //Check if the name is Exist or not
             var studentName = _studentRepository.GetTableNoTracking()
-                                                .Where(st => st.Name.Equals(name))
+                                                .Where(st => st.NameAr.Equals(name))
                                                 .FirstOrDefault();
             if (studentName == null)
                 return false;
@@ -106,7 +106,7 @@ namespace SchoolProject.Servies.Implementation
             var querable = _studentRepository.GetTableNoTracking().Include(x => x.Department).AsQueryable();
             if (search != null)
             {
-                querable = querable.Where(x => x.Name.Contains(search) || x.Address.Contains(search));
+                querable = querable.Where(x => x.NameAr.Contains(search) || x.Address.Contains(search));
             }
             switch (orderingEnum)
             {
@@ -114,13 +114,13 @@ namespace SchoolProject.Servies.Implementation
                     querable = querable.OrderBy(x => x.StudID);
                     break;
                 case StudentOrderingEnum.Name:
-                    querable = querable.OrderBy(x => x.Name);
+                    querable = querable.OrderBy(x => x.NameAr);
                     break;
                 case StudentOrderingEnum.Address:
                     querable = querable.OrderBy(x => x.Address);
                     break;
                 case StudentOrderingEnum.DepartmentName:
-                    querable = querable.OrderBy(x => x.Department.DName);
+                    querable = querable.OrderBy(x => x.Department.DNameAr);
                     break;
 
                 default: return querable;
@@ -132,7 +132,7 @@ namespace SchoolProject.Servies.Implementation
         public async Task<bool> IsNameExistExcludeSelf(string name, int id)
         {
             //Check if the name is Exist Or not
-            var student = await _studentRepository.GetTableNoTracking().Where(x => x.Name.Equals(name) & !x.StudID.Equals(id)).FirstOrDefaultAsync();
+            var student = await _studentRepository.GetTableNoTracking().Where(x => x.NameAr.Equals(name) & !x.StudID.Equals(id)).FirstOrDefaultAsync();
             if (student == null) return false;
             return true;
         }
