@@ -31,7 +31,11 @@ namespace SchoolProject.Core.Features.Students.Commands.Validatiors
         //for Rules in FluentValidation
         public void ApplyValidationsRules()
         {
-            RuleFor(x => x.Name)
+            RuleFor(x => x.NameInArbic)
+                .NotEmpty().WithMessage(_stringLocalizer[SharedResourcesKeys.NotEmpty])
+                .NotNull().WithMessage(_stringLocalizer[SharedResourcesKeys.NotNull])
+                .MaximumLength(100).WithMessage(_stringLocalizer[SharedResourcesKeys.MaxLenghtis100]);
+            RuleFor(x => x.NameInEnglish)
                 .NotEmpty().WithMessage(_stringLocalizer[SharedResourcesKeys.NotEmpty])
                 .NotNull().WithMessage(_stringLocalizer[SharedResourcesKeys.NotNull])
                 .MaximumLength(100).WithMessage(_stringLocalizer[SharedResourcesKeys.MaxLenghtis100]);
@@ -48,8 +52,12 @@ namespace SchoolProject.Core.Features.Students.Commands.Validatiors
         //for Custom Rules in FluentValidation
         public void ApplyCustomValidationsRules()
         {
-            RuleFor(x => x.Name)
-                .MustAsync(async (Key, CancellationToken) => !await _studentServies.IsNameExist(Key))
+            RuleFor(x => x.NameInArbic)
+    .MustAsync(async (Model, Key, CancellationToken) => !await _studentServies.IsNameExistExcludeSelf(Key, Model.Id))
+                .WithMessage(_stringLocalizer[SharedResourcesKeys.IsExist]);
+
+            RuleFor(x => x.NameInEnglish)
+                .MustAsync(async (Model, Key, CancellationToken) => !await _studentServies.IsNameExistExcludeSelf(Key, Model.Id))
                 .WithMessage(_stringLocalizer[SharedResourcesKeys.IsExist]);
         }
 
