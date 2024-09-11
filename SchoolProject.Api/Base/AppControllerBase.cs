@@ -1,13 +1,10 @@
-﻿using Azure;
-using MediatR;
-using Microsoft.AspNetCore.Http;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SchoolProject.Core.Bases;
 using System.Net;
 
 namespace SchoolProject.Api.Base
 {
-    [Route("api/[controller]")]
     [ApiController]
     //Genaric Controller of all controllers depand of
     public class AppControllerBase : ControllerBase

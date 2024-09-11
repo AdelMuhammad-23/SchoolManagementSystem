@@ -12,6 +12,10 @@ namespace SchoolProject.Servies
             {
 
                 services.AddTransient<IStudentServies, StudentServies>();
+                services.AddTransient<IDepartmentServies, DepartmentServies>();
+                services.AddTransient<IInstructorServies, InstructorServies>();
+                services.AddTransient<ISubjectServies, SubjectServies>();
+
                 return services;
             }
         }

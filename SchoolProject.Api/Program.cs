@@ -33,6 +33,8 @@ builder.Services.AddInfrastructureDependencis()
 #endregion
 
 
+
+
 #region Localization
 
 builder.Services.AddControllersWithViews();
@@ -57,6 +59,20 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 });
 
 #endregion
+
+#region Allow CORS
+var CORS = "_cors";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: CORS,
+                      policy =>
+                      {
+                          policy.AllowAnyOrigin();
+                          policy.AllowAnyHeader();
+                          policy.AllowAnyMethod();
+                      });
+});
+#endregion
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -75,6 +91,7 @@ app.UseRequestLocalization(options.Value);
 app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseHttpsRedirection();
+app.UseCors(CORS);
 
 app.UseAuthorization();
 

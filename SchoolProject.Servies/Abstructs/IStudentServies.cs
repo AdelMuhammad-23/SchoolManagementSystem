@@ -14,6 +14,7 @@ namespace SchoolProject.Servies.Abstructs
         public Task<string> EditAsync(Student student);
         public Task<string> DeleteAsync(Student student);
         public IQueryable<Student> GetStudentsQuerable();
+        public IQueryable<Student> GetStudentsByDepartmentIdQuerable(int DID);
         public IQueryable<Student> FilterStudentPaginatedQuerable(StudentOrderingEnum orderingEnum, string search);
         public Task<bool> IsNameExistExcludeSelf(string namr, int id);
 

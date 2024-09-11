@@ -17,5 +17,7 @@
         public const string Address = "Address";
         public const string IsExist = "IsExist";
         public const string MaxLenghtis100 = "MaxLenghtis100";
+        public const string IsDepartmentIdExist = "IsDepartmentIdExist";
+        public const string DepartmentId = "DepartmentId";
     }
 }

@@ -10,19 +10,22 @@ namespace SchoolProject.Core.Features.Students.Commands.Validatiors
     {
         #region Fields
         private readonly IStudentServies _studentServies;
+        private readonly IDepartmentServies _departmentServies;
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
 
         #endregion
 
 
         #region Constructors
-        public AddStudentValidators(IStudentServies studentServies, IStringLocalizer<SharedResources> stringLocalizer)
+        public AddStudentValidators(IStudentServies studentServies,
+            IStringLocalizer<SharedResources> stringLocalizer,
+            IDepartmentServies departmentServies)
         {
             _studentServies = studentServies;
             _stringLocalizer = stringLocalizer;
             ApplyValidationsRules();
             ApplyCustomValidationsRules();
-
+            _departmentServies = departmentServies;
         }
 
         #endregion
@@ -47,6 +50,9 @@ namespace SchoolProject.Core.Features.Students.Commands.Validatiors
                 .NotNull().WithMessage(_stringLocalizer[SharedResourcesKeys.NotNull])
                 .MaximumLength(100).WithMessage(_stringLocalizer[SharedResourcesKeys.MaxLenghtis100]);
 
+            RuleFor(x => x.DepartmentId)
+                .NotEmpty().WithMessage(_stringLocalizer[SharedResourcesKeys.NotEmpty])
+                .NotNull().WithMessage(_stringLocalizer[SharedResourcesKeys.NotNull]);
         }
 
 
@@ -60,6 +66,12 @@ namespace SchoolProject.Core.Features.Students.Commands.Validatiors
             RuleFor(x => x.NameInEnglish)
                 .MustAsync(async (Key, CancellationToken) => !await _studentServies.IsNameExist(Key))
                 .WithMessage(_stringLocalizer[SharedResourcesKeys.IsExist]);
+
+            RuleFor(x => x.DepartmentId)
+                .MustAsync(async (Key, CancellationToken) => await _departmentServies.IsDepartmentIdExist(Key))
+                .WithMessage(_stringLocalizer[SharedResourcesKeys.IsDepartmentIdExist]);
+
+
         }
 
         #endregion

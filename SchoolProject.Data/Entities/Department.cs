@@ -27,6 +27,7 @@ namespace SchoolProject.Data.Entities
         public virtual ICollection<DepartmentSubject> DepartmentSubjects { get; set; }
         [InverseProperty("Department")]
         public virtual ICollection<Instructor> Instructors { get; set; }
+        //Manager Prop
         [ForeignKey("InsManager")]
         [InverseProperty("departmentManager")]
 

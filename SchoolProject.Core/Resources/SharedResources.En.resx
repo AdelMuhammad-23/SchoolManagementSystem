@@ -133,7 +133,7 @@
     <value>Updated Successfully</value>
   </data>
   <data name="Success" xml:space="preserve">
-    <value>Added Successfully</value>
+    <value>Operation is Successfully</value>
   </data>
   <data name="NotEmpty" xml:space="preserve">
     <value> Must be not empty</value>
@@ -161,5 +161,11 @@
   </data>
   <data name="UnprocessableEntity" xml:space="preserve">
     <value>There are validation errors or syntax errors</value>
+  </data>
+  <data name="IsDepartmentIdExist" xml:space="preserve">
+    <value>Is not Exist</value>
+  </data>
+  <data name="DepartmentId" xml:space="preserve">
+    <value>Department Id</value>
   </data>
 </root>

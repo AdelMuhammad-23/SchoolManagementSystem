@@ -21,4 +21,26 @@
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="8.0.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Department\Commands\Models\" />
+    <Folder Include="Features\Department\Commands\Validatiors\" />
+    <Folder Include="Features\Instructors\Commands\Handlers\" />
+    <Folder Include="Features\Instructors\Commands\Models\" />
+    <Folder Include="Features\Instructors\Commands\Validatiors\" />
+    <Folder Include="Features\Instructors\Queries\Handlers\" />
+    <Folder Include="Features\Instructors\Queries\Models\" />
+    <Folder Include="Features\Instructors\Queries\Response\" />
+    <Folder Include="Features\Subjects\Commands\Handlers\" />
+    <Folder Include="Features\Subjects\Commands\Models\" />
+    <Folder Include="Features\Subjects\Commands\Validatiors\" />
+    <Folder Include="Features\Subjects\Queries\Handlers\" />
+    <Folder Include="Features\Subjects\Queries\Models\" />
+    <Folder Include="Features\Subjects\Queries\Response\" />
+    <Folder Include="Mapping\DepartmentMapping\CommandMapping\" />
+    <Folder Include="Mapping\InstructorMapping\CommandMapping\" />
+    <Folder Include="Mapping\InstructorMapping\QueryMapping\" />
+    <Folder Include="Mapping\SubjectMapping\CommandMapping\" />
+    <Folder Include="Mapping\SubjectMapping\QueryMapping\" />
+  </ItemGroup>
+
 </Project>

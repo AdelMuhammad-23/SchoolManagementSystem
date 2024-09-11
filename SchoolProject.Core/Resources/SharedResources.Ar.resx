@@ -133,7 +133,7 @@
     <value>تم التعديل بنجاح</value>
   </data>
   <data name="Success" xml:space="preserve">
-    <value>تمت الاضافه بنجاح </value>
+    <value>تمت العمليه بنجاح </value>
   </data>
   <data name="NotEmpty" xml:space="preserve">
     <value>لا يمكن ترك العنصر فارغ</value>
@@ -161,5 +161,11 @@
   </data>
   <data name="UnAuthorized" xml:space="preserve">
     <value>لا تملك صلاحيه للوصول الي تلك المصادر</value>
+  </data>
+  <data name="IsDepartmentIdExist" xml:space="preserve">
+    <value> غير موجود</value>
+  </data>
+  <data name="DepartmentId" xml:space="preserve">
+    <value>رقم القسم</value>
   </data>
 </root>
