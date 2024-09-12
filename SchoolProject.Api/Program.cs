@@ -28,8 +28,9 @@ option.UseSqlServer(ConnectionString)
 
 #region DependencyInjection
 builder.Services.AddInfrastructureDependencis()
-    .AddServiesDependencis()
-    .AddCoreDependencis();
+                .AddServiesDependencis()
+                .AddCoreDependencis()
+                .AddServiceRegisteration();
 #endregion
 
 
