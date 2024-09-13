@@ -36,6 +36,9 @@
     <Folder Include="Features\Subjects\Queries\Handlers\" />
     <Folder Include="Features\Subjects\Queries\Models\" />
     <Folder Include="Features\Subjects\Queries\Response\" />
+    <Folder Include="Features\ApplicationUser\Queries\Handlers\" />
+    <Folder Include="Features\ApplicationUser\Queries\Models\" />
+    <Folder Include="Mapping\ApplicationUserMapping\QueryMapping\" />
     <Folder Include="Mapping\DepartmentMapping\CommandMapping\" />
     <Folder Include="Mapping\InstructorMapping\CommandMapping\" />
     <Folder Include="Mapping\InstructorMapping\QueryMapping\" />
