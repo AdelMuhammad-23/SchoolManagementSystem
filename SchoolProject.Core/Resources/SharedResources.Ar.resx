@@ -168,4 +168,16 @@
   <data name="DepartmentId" xml:space="preserve">
     <value>رقم القسم</value>
   </data>
+  <data name="PasswordNotEqualConfirmPassword" xml:space="preserve">
+    <value>كلمة السر يجب أن تكون متطابقه</value>
+  </data>
+  <data name="EmailIsExist" xml:space="preserve">
+    <value> هذا البريد موجود بالفعل</value>
+  </data>
+  <data name="UserNameIsExist" xml:space="preserve">
+    <value>اسم المستخدم موجود مسبقا</value>
+  </data>
+  <data name="FaildToAddUser" xml:space="preserve">
+    <value>فشلت عملية اضافة هذا المستخدم</value>
+  </data>
 </root>

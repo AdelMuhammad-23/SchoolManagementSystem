@@ -168,4 +168,16 @@
   <data name="DepartmentId" xml:space="preserve">
     <value>Department Id</value>
   </data>
+  <data name="PasswordNotEqualConfirmPassword" xml:space="preserve">
+    <value>Password is Not Equal Confirm Password</value>
+  </data>
+  <data name="EmailIsExist" xml:space="preserve">
+    <value>This email is exist</value>
+  </data>
+  <data name="UserNameIsExist" xml:space="preserve">
+    <value>User Name already Is Exist</value>
+  </data>
+  <data name="FaildToAddUser" xml:space="preserve">
+    <value>Faild To Add this User</value>
+  </data>
 </root>
