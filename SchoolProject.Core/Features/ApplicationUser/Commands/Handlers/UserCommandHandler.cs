@@ -40,7 +40,6 @@ namespace SchoolProject.Core.Features.ApplicationUser.Commands.Handlers
             var userName = await _userManager.FindByNameAsync(request.UserName);
             //UserName is or not exist
             if (userName != null) return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.UserNameIsExist]);
-
             //Mapping User 
             var UserMapping = _mapper.Map<User>(request);
             // Create User
