@@ -180,4 +180,7 @@
   <data name="FaildToAddUser" xml:space="preserve">
     <value>فشلت عملية اضافة هذا المستخدم</value>
   </data>
+  <data name="FaildToUpdatedUser" xml:space="preserve">
+    <value>حدث خطأ اثناء عملية التحديث</value>
+  </data>
 </root>

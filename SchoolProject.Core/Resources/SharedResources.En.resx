@@ -180,4 +180,7 @@
   <data name="FaildToAddUser" xml:space="preserve">
     <value>Faild To Add this User</value>
   </data>
+  <data name="FaildToUpdatedUser" xml:space="preserve">
+    <value>Faild To Updated this User</value>
+  </data>
 </root>
