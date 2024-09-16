@@ -30,7 +30,7 @@ option.UseSqlServer(ConnectionString)
 builder.Services.AddInfrastructureDependencis()
                 .AddServiesDependencis()
                 .AddCoreDependencis()
-                .AddServiceRegisteration();
+                .AddServiceRegisteration(builder.Configuration);
 #endregion
 
 
@@ -94,6 +94,7 @@ app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseHttpsRedirection();
 app.UseCors(CORS);
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
