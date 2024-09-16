@@ -183,4 +183,16 @@
   <data name="FaildToUpdatedUser" xml:space="preserve">
     <value>حدث خطأ اثناء عملية التحديث</value>
   </data>
+  <data name="UserName" xml:space="preserve">
+    <value>اسم المستخدم</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>كلمة السر</value>
+  </data>
+  <data name="UserNameIsNotExist" xml:space="preserve">
+    <value>اسم المستخدم غير موجود</value>
+  </data>
+  <data name="PasswordIsNotCorrect" xml:space="preserve">
+    <value>كلمة السر غير صحيحه</value>
+  </data>
 </root>

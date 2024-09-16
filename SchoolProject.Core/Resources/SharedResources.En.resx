@@ -183,4 +183,16 @@
   <data name="FaildToUpdatedUser" xml:space="preserve">
     <value>Faild To Updated this User</value>
   </data>
+  <data name="UserName" xml:space="preserve">
+    <value>User Name</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="UserNameIsNotExist" xml:space="preserve">
+    <value>User Name Is Not Exist</value>
+  </data>
+  <data name="PasswordIsNotCorrect" xml:space="preserve">
+    <value>Password Is Not Correct</value>
+  </data>
 </root>
