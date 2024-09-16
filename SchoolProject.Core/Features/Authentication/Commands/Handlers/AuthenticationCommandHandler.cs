@@ -5,12 +5,13 @@ using SchoolProject.Core.Bases;
 using SchoolProject.Core.Features.Authentication.Commands.Models;
 using SchoolProject.Core.Resources;
 using SchoolProject.Data.Entities.Identity;
+using SchoolProject.Data.Helpers;
 using SchoolProject.Servies.Abstructs;
 
 namespace SchoolProject.Core.Features.Authentication.Commands
 {
     public class AuthenticationCommandHandler : ResponsesHandler,
-        IRequestHandler<SignInCommand, Responses<string>>
+        IRequestHandler<SignInCommand, Responses<JwtAuthResult>>
     {
         #region Fields
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
@@ -38,16 +39,16 @@ namespace SchoolProject.Core.Features.Authentication.Commands
 
 
         #region Handle Functions
-        public async Task<Responses<string>> Handle(SignInCommand request, CancellationToken cancellationToken)
+        public async Task<Responses<JwtAuthResult>> Handle(SignInCommand request, CancellationToken cancellationToken)
         {
             //Check if user is exist or not
             var user = await _userManager.FindByNameAsync(request.UserName);
             //Return The UserName Not Found
-            if (user == null) return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.UserNameIsNotExist]);
+            if (user == null) return BadRequest<JwtAuthResult>(_stringLocalizer[SharedResourcesKeys.UserNameIsNotExist]);
             //try To Sign in 
             var signInResult = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
             //if Failed Return Passord is wrong
-            if (!signInResult.Succeeded) return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.PasswordIsNotCorrect]);
+            if (!signInResult.Succeeded) return BadRequest<JwtAuthResult>(_stringLocalizer[SharedResourcesKeys.PasswordIsNotCorrect]);
 
             //Generate Token
             var result = await _authenticationService.GetJwtToken(user);
