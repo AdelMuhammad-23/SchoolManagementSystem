@@ -42,10 +42,10 @@
         }
         public static class Authentication
         {
-            public const string Prefix = Rule + "User/";
-            public const string List = Prefix + "List";
-            public const string GetById = Prefix + "{id}";
+            public const string Prefix = Rule + "Authentication/";
+            public const string RefreshToken = Prefix + "RefreshToken";
             public const string SignIn = Prefix + "SignIn";
+            public const string ValidateToken = Prefix + "ValidateToken";
             public const string Edit = Prefix + "Edit";
             public const string Delete = Prefix + "{id}";
             public const string Paginated = Prefix + "Paginated";
