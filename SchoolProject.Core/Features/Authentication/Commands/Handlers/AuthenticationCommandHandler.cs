@@ -11,7 +11,8 @@ using SchoolProject.Servies.Abstructs;
 namespace SchoolProject.Core.Features.Authentication.Commands
 {
     public class AuthenticationCommandHandler : ResponsesHandler,
-        IRequestHandler<SignInCommand, Responses<JwtAuthResult>>
+        IRequestHandler<SignInCommand, Responses<JwtAuthResult>>,
+        IRequestHandler<RefreshTokenCommand, Responses<JwtAuthResult>>
     {
         #region Fields
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
@@ -55,6 +56,12 @@ namespace SchoolProject.Core.Features.Authentication.Commands
             //return Token 
             return Success(result);
 
+        }
+
+        public async Task<Responses<JwtAuthResult>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _authenticationService.GetNewRefreshToken(request.AccessToken, request.RefreshToken);
+            return Success(result);
         }
         #endregion
 
