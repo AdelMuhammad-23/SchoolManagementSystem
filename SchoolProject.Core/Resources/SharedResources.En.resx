@@ -195,4 +195,16 @@
   <data name="PasswordIsNotCorrect" xml:space="preserve">
     <value>Password Is Not Correct</value>
   </data>
+  <data name="AlgorithmsIsNotCorrect" xml:space="preserve">
+    <value>Algorithms Is Not Correct</value>
+  </data>
+  <data name="TokenIsNotExpired" xml:space="preserve">
+    <value>Token Is Not Expired</value>
+  </data>
+  <data name="RefreshTokenIsNotFound" xml:space="preserve">
+    <value>Refresh Token Is Not Found</value>
+  </data>
+  <data name="RefreshTokenIsExpired" xml:space="preserve">
+    <value>Refresh Token Is Expired</value>
+  </data>
 </root>

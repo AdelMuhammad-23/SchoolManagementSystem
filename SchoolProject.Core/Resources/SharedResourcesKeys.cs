@@ -28,5 +28,10 @@
         public const string Password = "Password";
         public const string UserNameIsNotExist = "UserNameIsNotExist";
         public const string PasswordIsNotCorrect = "PasswordIsNotCorrect";
+
+        public const string AlgorithmsIsNotCorrect = "AlgorithmsIsNotCorrect";
+        public const string TokenIsNotExpired = "TokenIsNotExpired";
+        public const string RefreshTokenIsNotFound = "RefreshTokenIsNotFound";
+        public const string RefreshTokenIsExpired = "RefreshTokenIsExpired";
     }
 }

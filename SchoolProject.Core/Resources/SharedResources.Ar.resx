@@ -195,4 +195,16 @@
   <data name="PasswordIsNotCorrect" xml:space="preserve">
     <value>كلمة السر غير صحيحه</value>
   </data>
+  <data name="AlgorithmsIsNotCorrect" xml:space="preserve">
+    <value>هناك خطأ في الخوارزمية المستخدمة في التشفير</value>
+  </data>
+  <data name="TokenIsNotExpired" xml:space="preserve">
+    <value>رمز الوصول الذي تستخدمة ليس منتهي</value>
+  </data>
+  <data name="RefreshTokenIsNotFound" xml:space="preserve">
+    <value>رمز التنشيط الذي تستخمه ليس موجود</value>
+  </data>
+  <data name="RefreshTokenIsExpired" xml:space="preserve">
+    <value>رمز التنشيط الذي تستخدمه انتهت صلاحية</value>
+  </data>
 </root>

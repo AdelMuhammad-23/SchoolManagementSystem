@@ -60,7 +60,28 @@ namespace SchoolProject.Core.Features.Authentication.Commands
 
         public async Task<Responses<JwtAuthResult>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
         {
-            var result = await _authenticationService.GetNewRefreshToken(request.AccessToken, request.RefreshToken);
+            var jwtToken = _authenticationService.ReadJwtToken(request.AccessToken);
+            var userIdAndExpireDate = await _authenticationService.ValidateDetails(jwtToken, request.AccessToken, request.RefreshToken);
+            switch (userIdAndExpireDate)
+            {
+                case ("Algorithms is not correct", null):
+                    return Unauthorized<JwtAuthResult>(_stringLocalizer[SharedResourcesKeys.AlgorithmsIsNotCorrect]);
+                case (("Token is not expired", null)):
+                    return BadRequest<JwtAuthResult>(_stringLocalizer[SharedResourcesKeys.TokenIsNotExpired]);
+                case ("Refresh Token is Not Found", null):
+                    return NotFound<JwtAuthResult>(_stringLocalizer[SharedResourcesKeys.RefreshTokenIsNotFound]);
+                case ("Refresh Token is expired", null):
+                    return Unauthorized<JwtAuthResult>(_stringLocalizer[SharedResourcesKeys.RefreshTokenIsExpired]);
+
+            }
+
+            var (userId, expiryDate) = userIdAndExpireDate;
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound<JwtAuthResult>();
+            }
+            var result = await _authenticationService.GetNewRefreshToken(user, jwtToken, expiryDate, request.RefreshToken);
             return Success(result);
         }
         #endregion
