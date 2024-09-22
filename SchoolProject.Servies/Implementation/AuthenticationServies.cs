@@ -115,6 +115,55 @@ namespace SchoolProject.Servies.Implementation
             }
         }
 
+        public async Task<JwtAuthResult> GetNewRefreshToken(User user, JwtSecurityToken jwtToken, DateTime? expiryDate, string refreshToken)
+        {
+
+            var (jwtSecurityToken, newToken) = GetJWTToken(user);
+            #region Generate New Refresh Token
+            var response = new JwtAuthResult();
+            //new AccessToken
+            response.AccessToken = newToken;
+            //new Refresh Token
+            var refreshTokenResult = new RefreshToken();
+            refreshTokenResult.UserName = jwtToken.Claims.FirstOrDefault(x => x.Type == nameof(UserClaimModel.UserName)).Value;
+            refreshTokenResult.TokenString = refreshToken;
+            refreshTokenResult.ExpierAt = (DateTime)expiryDate;
+            response.RefreshToken = refreshTokenResult;
+
+            return response;
+            #endregion
+        }
+        public async Task<string> ValidateToken(string accessToken)
+        {
+
+            var handler = new JwtSecurityTokenHandler();
+            var parameterHandler = new TokenValidationParameters
+            {
+                ValidateIssuer = _jwtSettings.ValidateIssuer,
+                ValidIssuers = new[] { _jwtSettings.Issuer },
+                ValidateIssuerSigningKey = _jwtSettings.ValidateIssuerSigningKey,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtSettings.Secret)),
+                ValidAudience = _jwtSettings.Audience,
+                ValidateAudience = _jwtSettings.ValidateAudience,
+                ValidateLifetime = _jwtSettings.ValidateLifeTime,
+            };
+
+            try
+            {
+                var validator = handler.ValidateToken(accessToken, parameterHandler, out SecurityToken validatedToken);
+
+                if (validatedToken == null)
+                {
+                    return "InvalidToken";
+                }
+                return "NotExpired";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
 
         #endregion
 
