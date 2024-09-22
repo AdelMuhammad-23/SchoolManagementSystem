@@ -21,15 +21,18 @@ namespace SchoolProject.Core.Features.ApplicationUser.Commands.Handlers
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
+        private readonly RoleManager<Role> _identityRole;
         #endregion
         #region Constructors
         public UserCommandHandler(IStringLocalizer<SharedResources> stringLocalizer,
                                   IMapper mapper,
-                                  UserManager<User> userManager) : base(stringLocalizer)
+                                  UserManager<User> userManager,
+                                  RoleManager<Role> identityRole) : base(stringLocalizer)
         {
             _stringLocalizer = stringLocalizer;
             _mapper = mapper;
             _userManager = userManager;
+            _identityRole = identityRole;
         }
 
 
@@ -52,6 +55,15 @@ namespace SchoolProject.Core.Features.ApplicationUser.Commands.Handlers
 
             if (!createUser.Succeeded)
                 return BadRequest<string>(createUser.Errors.FirstOrDefault().Description);
+            var users = await _userManager.Users.ToListAsync();
+            if (users.Count >= 0)
+            {
+                await _userManager.AddToRoleAsync(UserMapping, "User");
+            }
+            else
+            {
+                await _userManager.AddToRoleAsync(UserMapping, "Admin");
+            }
 
             return Created("");
         }
