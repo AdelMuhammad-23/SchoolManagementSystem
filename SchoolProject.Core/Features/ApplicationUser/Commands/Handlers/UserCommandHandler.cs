@@ -7,6 +7,7 @@ using SchoolProject.Core.Bases;
 using SchoolProject.Core.Features.ApplicationUser.Commands.Models;
 using SchoolProject.Core.Resources;
 using SchoolProject.Data.Entities.Identity;
+using SchoolProject.Data.Helpers;
 
 namespace SchoolProject.Core.Features.ApplicationUser.Commands.Handlers
 {
@@ -57,7 +58,7 @@ namespace SchoolProject.Core.Features.ApplicationUser.Commands.Handlers
                 return BadRequest<string>(createUser.Errors.FirstOrDefault().Description);
             var users = await _userManager.Users.ToListAsync();
 
-            await _userManager.AddToRoleAsync(UserMapping, "User");
+            await _userManager.AddToRoleAsync(UserMapping, DefaultRoles.User);
 
             return Created("");
         }
