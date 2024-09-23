@@ -3,6 +3,10 @@
     public interface IAuthorizationServies
     {
         public Task<string> AddRoleAsync(string roleName);
+        public Task<string> EditRoleAsync(string oldRole, string newRole);
+        public Task<string> DeleteRoleAsync(int id);
         public Task<bool> IsRoleExist(string roleName);
+        public Task<bool> IsRoleNameExistExcludeSelf(string roleName, int id);
+
     }
 }

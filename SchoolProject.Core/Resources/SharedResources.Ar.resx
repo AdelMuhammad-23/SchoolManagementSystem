@@ -207,4 +207,10 @@
   <data name="RefreshTokenIsExpired" xml:space="preserve">
     <value>رمز التنشيط الذي تستخدمه انتهت صلاحية</value>
   </data>
+  <data name="RoleIsNotFound" xml:space="preserve">
+    <value>هذه الصلاحية ليست موجوده</value>
+  </data>
+  <data name="RoleIsUsed" xml:space="preserve">
+    <value>هذه الصلاحيه يوجد بها مستخدمين بالفعل</value>
+  </data>
 </root>

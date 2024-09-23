@@ -207,4 +207,10 @@
   <data name="RefreshTokenIsExpired" xml:space="preserve">
     <value>Refresh Token Is Expired</value>
   </data>
+  <data name="RoleIsNotFound" xml:space="preserve">
+    <value>Role Is Not Found</value>
+  </data>
+  <data name="RoleIsUsed" xml:space="preserve">
+    <value>Role Is Used</value>
+  </data>
 </root>
