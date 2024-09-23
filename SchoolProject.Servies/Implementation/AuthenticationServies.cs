@@ -42,7 +42,7 @@ namespace SchoolProject.Servies.Implementation
         #region Handle Functions
         public async Task<JwtAuthResult> GetJwtToken(User user)
         {
-            var (jwtToken, accessToken) = GetJWTToken(user);
+            var (jwtToken, accessToken) = await GetJWTToken(user);
             var refreshToken = GetRefreshToken(user.UserName);
 
             var refreshTokenResult = new UserRefreshToken
@@ -69,7 +69,7 @@ namespace SchoolProject.Servies.Implementation
         public async Task<JwtAuthResult> GetNewRefreshToken(User user, JwtSecurityToken jwtToken, DateTime? expiryDate, string refreshToken)
         {
 
-            var (jwtSecurityToken, newToken) = GetJWTToken(user);
+            var (jwtSecurityToken, newToken) = await GetJWTToken(user);
             #region Generate New Refresh Token
             var response = new JwtAuthResult();
             //new AccessToken
@@ -122,7 +122,7 @@ namespace SchoolProject.Servies.Implementation
         #endregion
 
         #region Claims Functions
-        private List<Claim> GetClaims(User user)
+        public List<Claim> GetClaims(User user, List<string> roles)
         {
             var claims = new List<Claim>()
             {
@@ -130,17 +130,22 @@ namespace SchoolProject.Servies.Implementation
                 new Claim(nameof(UserClaimModel.Email), user.Email),
                 new Claim(nameof(UserClaimModel.PhoneNumber), user.PhoneNumber),
                 new Claim(nameof(UserClaimModel.Id), user.Id.ToString()),
+                new Claim(ClaimTypes.NameIdentifier,user.UserName)
 
             };
+
+            foreach (var role in roles)
+                claims.Add(new Claim(ClaimTypes.Role, role));
             return claims;
         }
         #endregion
 
         #region JWT Token Functions  For Help
         // using tabel to retern more than one of types like string and JwtSecurityToken
-        private (JwtSecurityToken, string) GetJWTToken(User user)
+        private async Task<(JwtSecurityToken, string)> GetJWTToken(User user)
         {
-            var claims = GetClaims(user);
+            var roles = await _userManager.GetRolesAsync(user);
+            var claims = GetClaims(user, roles.ToList());
             var jwtToken = new JwtSecurityToken(
               _jwtSettings.Issuer,
               _jwtSettings.Audience,

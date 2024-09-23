@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SchoolProject.Data.Entities.Identity;
+using SchoolProject.Data.Helpers;
 
 namespace SchoolProject.Infrastructure.Seeder
 {
@@ -24,7 +25,7 @@ namespace SchoolProject.Infrastructure.Seeder
                     PhoneNumberConfirmed = true
                 };
                 await userManager.CreateAsync(defaultUser, "Dd2003#");
-                await userManager.AddToRoleAsync(defaultUser, "Admin");
+                await userManager.AddToRoleAsync(defaultUser, DefaultRoles.Admin);
             }
         }
     }

@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolProject.Api.Base;
 using SchoolProject.Core.Features.Authorization.Commands.Models;
 using SchoolProject.Data.AppMetaData;
+using SchoolProject.Data.Helpers;
 
 namespace SchoolProject.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = DefaultRoles.Admin)]
     public class AuthorizationController : AppControllerBase
     {
         [HttpPost(Router.Authorization.CreateRole)]
