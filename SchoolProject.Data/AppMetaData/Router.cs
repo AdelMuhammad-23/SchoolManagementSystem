@@ -56,8 +56,8 @@
         {
             public const string Prefix = Rule + "Authorization/";
             public const string CreateRole = Prefix + "CreateRole";
-            public const string SignIn = Prefix + "SignIn";
-            public const string ValidateToken = Prefix + "ValidateToken";
+            public const string EditRole = Prefix + "EditRole";
+            public const string DeleteRole = Prefix + "{id}";
             public const string Edit = Prefix + "Edit";
             public const string Delete = Prefix + "{id}";
             public const string Paginated = Prefix + "Paginated";

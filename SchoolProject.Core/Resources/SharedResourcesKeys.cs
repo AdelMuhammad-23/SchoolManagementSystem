@@ -33,5 +33,8 @@
         public const string TokenIsNotExpired = "TokenIsNotExpired";
         public const string RefreshTokenIsNotFound = "RefreshTokenIsNotFound";
         public const string RefreshTokenIsExpired = "RefreshTokenIsExpired";
+
+        public const string RoleIsNotFound = "RoleIsNotFound";
+        public const string RoleIsUsed = "RoleIsUsed";
     }
 }

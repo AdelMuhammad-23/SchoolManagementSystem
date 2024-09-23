@@ -17,5 +17,16 @@ namespace SchoolProject.Api.Controllers
             var response = await Mediator.Send(command);
             return NewResult(response);
         }
+        [HttpPut(Router.Authorization.EditRole)]
+        public async Task<IActionResult> Edit([FromForm] EditRoleCommand command)
+        {
+            var response = await Mediator.Send(command);
+            return NewResult(response);
+        }
+        [HttpDelete(Router.Authorization.DeleteRole)]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            return NewResult(await Mediator.Send(new DeleteRoleCommand(id)));
+        }
     }
 }
