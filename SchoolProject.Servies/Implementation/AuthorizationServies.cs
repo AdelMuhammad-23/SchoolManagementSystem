@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using SchoolProject.Data.Entities.Identity;
 using SchoolProject.Servies.Abstructs;
 
@@ -59,6 +60,44 @@ namespace SchoolProject.Servies.Implementation
             return errors;
         }
 
+        public async Task<string> DeleteRoleAsync(int id)
+        {
+            var role = await _roleManager.FindByIdAsync(id.ToString());
+            if (role == null) return "this role is not Found";
+            var users = await _userManager.GetUsersInRoleAsync(role.Name);
+            if (users != null && users.Count() > 0) return "Used";
+            var result = await _roleManager.DeleteAsync(role);
+            if (result.Succeeded)
+                return "Success";
+            var errors = string.Join(", ", result.Errors);
+            return errors;
+
+        }
+
+        public async Task<string> EditRoleAsync(string oldRole, string newRole)
+        {
+            var role = await _roleManager.FindByNameAsync(oldRole);
+            if (role == null)
+                return "this role is not Found";
+            role.Name = newRole;
+            var result = await _roleManager.UpdateAsync(role);
+            if (result.Succeeded)
+                return "Success";
+            var errors = string.Join(", ", result.Errors);
+            return errors;
+        }
+
+        public async Task<Role> GetRoleByIdAsync(int id)
+        {
+            var role = await _roleManager.FindByIdAsync(id.ToString());
+            return role;
+        }
+
+        public async Task<List<Role>> GetRolesListAsync()
+        {
+            var roles = await _roleManager.Roles.ToListAsync();
+            return roles;
+        }
 
         public async Task<bool> IsRoleExist(string roleName)
         {

@@ -24,9 +24,6 @@
   <ItemGroup>
     <Folder Include="Features\Authentication\Commands\Response\" />
     <Folder Include="Features\Authentication\Queries\Response\" />
-    <Folder Include="Features\Authorization\Queries\Handlers\" />
-    <Folder Include="Features\Authorization\Queries\Models\" />
-    <Folder Include="Features\Authorization\Queries\Response\" />
     <Folder Include="Features\Department\Commands\Models\" />
     <Folder Include="Features\Department\Commands\Validatiors\" />
     <Folder Include="Features\Instructors\Commands\Handlers\" />
@@ -41,6 +38,7 @@
     <Folder Include="Features\Subjects\Queries\Handlers\" />
     <Folder Include="Features\Subjects\Queries\Models\" />
     <Folder Include="Features\Subjects\Queries\Response\" />
+    <Folder Include="Mapping\AuthorizationMapping\CommandMapping\" />
     <Folder Include="Mapping\DepartmentMapping\CommandMapping\" />
     <Folder Include="Mapping\InstructorMapping\CommandMapping\" />
     <Folder Include="Mapping\InstructorMapping\QueryMapping\" />
