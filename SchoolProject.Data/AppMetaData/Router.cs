@@ -58,9 +58,9 @@
             public const string CreateRole = Prefix + "CreateRole";
             public const string EditRole = Prefix + "EditRole";
             public const string DeleteRole = Prefix + "{id}";
-            public const string Edit = Prefix + "Edit";
+            public const string List = Prefix + "Role/List";
             public const string Delete = Prefix + "{id}";
-            public const string Paginated = Prefix + "Paginated";
+            public const string GetById = Prefix + "Role/{id}";
             public const string ChangePassword = Prefix + "ChangePassword";
 
         }
