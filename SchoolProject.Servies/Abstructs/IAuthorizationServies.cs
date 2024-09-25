@@ -1,4 +1,5 @@
 ﻿using SchoolProject.Data.Entities.Identity;
+using SchoolProject.Data.Helpers;
 
 namespace SchoolProject.Servies.Abstructs
 {
@@ -11,6 +12,7 @@ namespace SchoolProject.Servies.Abstructs
         public Task<string> DeleteRoleAsync(int id);
         public Task<bool> IsRoleExist(string roleName);
         public Task<bool> IsRoleNameExistExcludeSelf(string roleName, int id);
+        public Task<ManageUserRoleResponse> GetManageUserRoleResponse(User user);
 
     }
 }

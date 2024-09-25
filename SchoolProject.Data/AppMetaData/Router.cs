@@ -61,7 +61,7 @@
             public const string List = Prefix + "Role/List";
             public const string Delete = Prefix + "{id}";
             public const string GetById = Prefix + "Role/{id}";
-            public const string ChangePassword = Prefix + "ChangePassword";
+            public const string GetManagerUserRole = Prefix + "GetManagerUserRole/{id}";
 
         }
     }
