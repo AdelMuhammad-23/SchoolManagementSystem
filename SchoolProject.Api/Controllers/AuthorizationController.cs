@@ -52,5 +52,11 @@ namespace SchoolProject.Api.Controllers
         {
             return NewResult(await Mediator.Send(new DeleteRoleCommand(id)));
         }
+        [SwaggerOperation(summary: "تعديل صلاحيات المستخدمين", OperationId = "EditUserRole")]
+        [HttpPut(Router.Authorization.EditUserRole)]
+        public async Task<IActionResult> EditUserRole([FromBody] EditUserRoleCommand command)
+        {
+            return NewResult(await Mediator.Send(command));
+        }
     }
 }

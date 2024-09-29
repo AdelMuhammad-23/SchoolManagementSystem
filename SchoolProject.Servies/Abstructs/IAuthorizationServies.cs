@@ -13,6 +13,7 @@ namespace SchoolProject.Servies.Abstructs
         public Task<bool> IsRoleExist(string roleName);
         public Task<bool> IsRoleNameExistExcludeSelf(string roleName, int id);
         public Task<ManageUserRoleResponse> GetManageUserRoleResponse(User user);
+        public Task<string> EditUserRoleAsync(EditUserRole editUserRole);
 
     }
 }

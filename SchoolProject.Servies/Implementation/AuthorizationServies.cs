@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SchoolProject.Data.Entities.Identity;
 using SchoolProject.Data.Helpers;
+using SchoolProject.Infrastructure.Data;
 using SchoolProject.Servies.Abstructs;
 
 namespace SchoolProject.Servies.Implementation
@@ -11,13 +12,15 @@ namespace SchoolProject.Servies.Implementation
         #region Fields
         private readonly RoleManager<Role> _roleManager;
         private readonly UserManager<User> _userManager;
+        private readonly ApplicationDbContext _dbContext;
         #endregion
 
         #region Constructos
-        public AuthorizationServies(RoleManager<Role> roleManager, UserManager<User> userManager)
+        public AuthorizationServies(RoleManager<Role> roleManager, UserManager<User> userManager, ApplicationDbContext dbContext)
         {
             _roleManager = roleManager;
             _userManager = userManager;
+            _dbContext = dbContext;
         }
 
         #endregion
@@ -61,6 +64,32 @@ namespace SchoolProject.Servies.Implementation
             return errors;
         }
 
+        public async Task<string> EditUserRoleAsync(EditUserRole editUserRole)
+        {
+            var trancat = _dbContext.Database.BeginTransaction();
+            try
+            {
+                var user = await _userManager.FindByIdAsync(editUserRole.UserId.ToString());
+                if (user == null) return "User Not Found";
+                var oldUserRolesList = await _userManager.GetRolesAsync(user);
+                var deleteOldUserRoleList = await _userManager.RemoveFromRolesAsync(user, oldUserRolesList);
+                if (!deleteOldUserRoleList.Succeeded)
+                    return "Failed to remove old UserRoles";
+
+                var newRoles = editUserRole.Roles.Where(x => x.HasRole == true).Select(x => x.Name);
+                var newUserRolesList = await _userManager.AddToRolesAsync(user, newRoles);
+                if (!newUserRolesList.Succeeded)
+                    return "Failed to Add New UserRoles";
+                await trancat.CommitAsync();
+
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                await trancat.RollbackAsync();
+                return "Failed to Update UserRoles";
+            }
+        }
 
         public async Task<ManageUserRoleResponse> GetManageUserRoleResponse(User user)
         {
