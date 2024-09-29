@@ -213,4 +213,16 @@
   <data name="RoleIsUsed" xml:space="preserve">
     <value>هذه الصلاحيه يوجد بها مستخدمين بالفعل</value>
   </data>
+  <data name="FailedToUpdateUserRoles" xml:space="preserve">
+    <value>فشلة عملية تحديث الصلاحيات</value>
+  </data>
+  <data name="FailedToAddNewRoles" xml:space="preserve">
+    <value>فشلة عملية اضافة الصلاحيات الجديده</value>
+  </data>
+  <data name="FailedToRemoveOldRoles" xml:space="preserve">
+    <value>فشلة عملية حذف الصلاحيات القديمه</value>
+  </data>
+  <data name="UserIsNotFound" xml:space="preserve">
+    <value>هذا المستخدم غير موجود</value>
+  </data>
 </root>
