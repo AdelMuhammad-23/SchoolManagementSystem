@@ -57,8 +57,10 @@
             public const string Prefix = Rule + "Authorization/";
             public const string CreateRole = Prefix + "CreateRole";
             public const string EditRole = Prefix + "EditRole";
+            public const string EditUserClaims = Prefix + "EditUserClaims";
             public const string EditUserRole = Prefix + "EditUserRole";
             public const string DeleteRole = Prefix + "{id}";
+            public const string GetManagerUserClaims = Prefix + "GetManagerUserClaims/{id}";
             public const string List = Prefix + "Role/List";
             public const string Delete = Prefix + "{id}";
             public const string GetById = Prefix + "Role/{id}";

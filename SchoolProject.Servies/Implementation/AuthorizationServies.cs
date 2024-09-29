@@ -4,6 +4,7 @@ using SchoolProject.Data.Entities.Identity;
 using SchoolProject.Data.Helpers;
 using SchoolProject.Infrastructure.Data;
 using SchoolProject.Servies.Abstructs;
+using System.Security.Claims;
 
 namespace SchoolProject.Servies.Implementation
 {
@@ -62,6 +63,34 @@ namespace SchoolProject.Servies.Implementation
                 return "Success";
             var errors = string.Join(", ", result.Errors);
             return errors;
+        }
+
+        public async Task<string> EditUserClaimsAsync(EditUserClaims editUserClaims)
+        {
+            var trancat = _dbContext.Database.BeginTransaction();
+            try
+            {
+                var user = await _userManager.FindByIdAsync(editUserClaims.UserId.ToString());
+                if (user == null) return "User Not Found";
+                var oldClaims = await _userManager.GetClaimsAsync(user);
+
+                var removeOldClaims = await _userManager.RemoveClaimsAsync(user, oldClaims);
+                if (!removeOldClaims.Succeeded)
+                    return "Failed to remove old UserClaims";
+                var selectedClaims = editUserClaims.UserClaims.Where(x => x.Value == true).Select(x => new Claim(x.Type, x.Value.ToString()));
+                var newClaims = await _userManager.AddClaimsAsync(user, selectedClaims);
+                if (!newClaims.Succeeded)
+                    return "Failed to Add New UserClaims";
+
+
+                await trancat.CommitAsync();
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                await trancat.RollbackAsync();
+                return "Failed to Edit  UserClaims";
+            }
         }
 
         public async Task<string> EditUserRoleAsync(EditUserRole editUserRole)
@@ -134,6 +163,35 @@ namespace SchoolProject.Servies.Implementation
             if (role == null) return false;
             return true;
 
+        }
+
+        public async Task<ManageUserClaimsResponse> ManageUserClaims(User user)
+        {
+            //create Empty response
+            var response = new ManageUserClaimsResponse();
+            //create empty userClaims list
+            var claimsList = new List<UserClaims>();
+            //get claims for user
+            var userClaims = await _userManager.GetClaimsAsync(user);
+
+            response.UserId = user.Id;
+
+            foreach (var claim in ClaimsStore.claims)
+            {
+                //create new object from UserClaims 
+                var claims = new UserClaims();
+                //check user claims is equal any claims in claims store or not 
+                if (userClaims.Any(x => x.Type == claim.Type))
+                    claims.Value = true;
+
+                claims.Type = claim.Type;
+                //add object in claims list
+                claimsList.Add(claims);
+            }
+            //add claims list in userClaims in response
+            response.UserClaims = claimsList;
+
+            return response;
         }
 
 
