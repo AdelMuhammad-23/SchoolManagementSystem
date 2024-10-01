@@ -38,8 +38,12 @@ namespace SchoolProject.Infrastructure
 
             var jwtSettings = new JwtSettings();
             configuration.GetSection(nameof(jwtSettings)).Bind(jwtSettings);
-
             services.AddSingleton(jwtSettings);
+
+            var emailSettings = new EmailSettings();
+            configuration.GetSection(nameof(emailSettings)).Bind(emailSettings);
+            services.AddSingleton(emailSettings);
+
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -89,35 +93,30 @@ namespace SchoolProject.Infrastructure
             Array.Empty<string>()
             }
            });
-
-                services.AddAuthorization(options =>
-                {
-                    options.AddPolicy("Create", policy =>
-                    {
-                        policy.RequireClaim("Create", true.ToString());
-                    });
-
-                    options.AddPolicy("Edit", policy =>
-                    {
-                        policy.RequireClaim("Edit", true.ToString());
-                    });
-
-                    options.AddPolicy("Delete", policy =>
-                    {
-                        policy.RequireClaim("Delete", true.ToString());
-                    });
-
-                    options.AddPolicy("Get", policy =>
-                    {
-                        policy.RequireClaim("Get", true.ToString());
-                    });
-                });
             });
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Create", policy =>
+                {
+                    policy.RequireClaim("Create", true.ToString());
+                });
 
+                options.AddPolicy("Edit", policy =>
+                {
+                    policy.RequireClaim("Edit", true.ToString());
+                });
 
+                options.AddPolicy("Delete", policy =>
+                {
+                    policy.RequireClaim("Delete", true.ToString());
+                });
 
-
+                options.AddPolicy("Get", policy =>
+                {
+                    policy.RequireClaim("Get", true.ToString());
+                });
+            });
 
             return services;
         }

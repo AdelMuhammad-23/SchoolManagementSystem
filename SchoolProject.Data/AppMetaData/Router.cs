@@ -17,6 +17,11 @@
             public const string Paginated = Prefix + "Paginated";
 
         }
+        public static class EmailRouting
+        {
+            public const string Prefix = Rule + "EmailRouting/";
+            public const string SendEmail = Prefix + "SendEmail";
+        }
         public static class DepartmentRouting
         {
             public const string Prefix = Rule + "Department/";
