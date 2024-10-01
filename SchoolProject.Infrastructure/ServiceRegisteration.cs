@@ -64,7 +64,7 @@ namespace SchoolProject.Infrastructure
             //Swagger Gn
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "College Management System API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "School Management System API", Version = "v1" });
                 c.EnableAnnotations();
 
                 c.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
@@ -89,6 +89,29 @@ namespace SchoolProject.Infrastructure
             Array.Empty<string>()
             }
            });
+
+                services.AddAuthorization(options =>
+                {
+                    options.AddPolicy("Create", policy =>
+                    {
+                        policy.RequireClaim("Create", true.ToString());
+                    });
+
+                    options.AddPolicy("Edit", policy =>
+                    {
+                        policy.RequireClaim("Edit", true.ToString());
+                    });
+
+                    options.AddPolicy("Delete", policy =>
+                    {
+                        policy.RequireClaim("Delete", true.ToString());
+                    });
+
+                    options.AddPolicy("Get", policy =>
+                    {
+                        policy.RequireClaim("Get", true.ToString());
+                    });
+                });
             });
 
 

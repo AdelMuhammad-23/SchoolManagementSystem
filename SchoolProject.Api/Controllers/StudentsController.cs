@@ -4,11 +4,13 @@ using SchoolProject.Api.Base;
 using SchoolProject.Core.Features.Students.Commands.Models;
 using SchoolProject.Core.Features.Students.Queries.Models;
 using SchoolProject.Data.AppMetaData;
+using SchoolProject.Data.Helpers;
 
 namespace SchoolProject.Api.Controllers
 {
-    [Authorize]
     [ApiController]
+    [Authorize(Roles = DefaultRoles.Admin)]
+
     public class StudentsController : AppControllerBase
     {
         [HttpGet(Router.StudentRouting.List)]
@@ -29,19 +31,22 @@ namespace SchoolProject.Api.Controllers
         {
             return NewResult(await Mediator.Send(new GetStudentByIdQuery(id)));
         }
-
+        [Authorize(policy: "Create")]
         [HttpPost(Router.StudentRouting.Create)]
         public async Task<IActionResult> Create([FromBody] AddStudentCommand command)
         {
             return NewResult(await Mediator.Send(command));
         }
 
+        [Authorize(policy: "Edit")]
         [HttpPut(Router.StudentRouting.Edit)]
         public async Task<IActionResult> Edit([FromBody] EditStudentCommand command)
         {
             var response = await Mediator.Send(command);
             return NewResult(response);
         }
+
+        [Authorize(policy: "Delete")]
         [HttpDelete(Router.StudentRouting.Delete)]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
