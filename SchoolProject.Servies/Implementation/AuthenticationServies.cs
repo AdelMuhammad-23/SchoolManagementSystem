@@ -122,8 +122,9 @@ namespace SchoolProject.Servies.Implementation
         #endregion
 
         #region Claims Functions
-        public List<Claim> GetClaims(User user, List<string> roles)
+        public async Task<List<Claim>> GetClaims(User user)
         {
+            var roles = await _userManager.GetRolesAsync(user);
             var claims = new List<Claim>()
             {
                 new Claim(nameof(UserClaimModel.UserName), user.UserName),
@@ -136,16 +137,17 @@ namespace SchoolProject.Servies.Implementation
 
             foreach (var role in roles)
                 claims.Add(new Claim(ClaimTypes.Role, role));
+            var userClaims = await _userManager.GetClaimsAsync(user);
+            claims.AddRange(userClaims);
             return claims;
         }
         #endregion
 
         #region JWT Token Functions  For Help
-        // using tabel to retern more than one of types like string and JwtSecurityToken
+        // using table to return more than one of types like string and JwtSecurityToken
         private async Task<(JwtSecurityToken, string)> GetJWTToken(User user)
         {
-            var roles = await _userManager.GetRolesAsync(user);
-            var claims = GetClaims(user, roles.ToList());
+            var claims = await GetClaims(user);
             var jwtToken = new JwtSecurityToken(
               _jwtSettings.Issuer,
               _jwtSettings.Audience,
