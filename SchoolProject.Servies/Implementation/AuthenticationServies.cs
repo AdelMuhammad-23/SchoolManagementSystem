@@ -230,6 +230,17 @@ namespace SchoolProject.Servies.Implementation
             var expirydate = userRefreshToken.ExpiryDate;
             return (userId, expirydate);
         }
+
+        public async Task<string> ConfirmEmailAsync(int userId, string code)
+        {
+            if (userId == null || code == null)
+                return "Invalid UserId Or Code";
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            var confirmEmail = await _userManager.ConfirmEmailAsync(user, code);
+            if (!confirmEmail.Succeeded)
+                return "Error When Confirm Email";
+            return "Success";
+        }
         #endregion
 
 

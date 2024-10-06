@@ -5,7 +5,7 @@ using SchoolProject.Core.Resources;
 
 namespace SchoolProject.Core.Features.Authentication.Commands.Validatiors
 {
-    public class SignInValidator : AbstractValidator<SignInCommand>
+    public class ConfirmEmailValidator : AbstractValidator<ConfirmEmailCommand>
     {
         #region Fields
         private readonly IStringLocalizer<SharedResources> _stringlocalization;
@@ -13,7 +13,7 @@ namespace SchoolProject.Core.Features.Authentication.Commands.Validatiors
 
         #region Constructors
 
-        public SignInValidator(IStringLocalizer<SharedResources> stringlocalization)
+        public ConfirmEmailValidator(IStringLocalizer<SharedResources> stringlocalization)
         {
             _stringlocalization = stringlocalization;
             ApplyValidationsRules();
@@ -25,10 +25,10 @@ namespace SchoolProject.Core.Features.Authentication.Commands.Validatiors
 
         public void ApplyValidationsRules()
         {
-            RuleFor(x => x.UserName)
+            RuleFor(x => x.userId)
                 .NotEmpty().WithMessage(_stringlocalization[SharedResourcesKeys.NotEmpty])
                 .NotNull().WithMessage(_stringlocalization[SharedResourcesKeys.NotNull]);
-            RuleFor(x => x.Password)
+            RuleFor(x => x.Code)
                 .NotEmpty().WithMessage(_stringlocalization[SharedResourcesKeys.NotEmpty])
                 .NotNull().WithMessage(_stringlocalization[SharedResourcesKeys.NotNull]);
         }

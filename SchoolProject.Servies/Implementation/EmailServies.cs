@@ -40,7 +40,7 @@ namespace SchoolProject.Servies.Implementation
                     };
                     message.From.Add(new MailboxAddress("School Support", _emailSettings.FromEmail));
                     message.To.Add(new MailboxAddress("testing", email));
-                    message.Subject = "No Subject Submitted";
+                    message.Subject = "Verify your email address";
                     await client.SendAsync(message);
 
                     await client.DisconnectAsync(true);
