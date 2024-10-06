@@ -12,7 +12,8 @@ namespace SchoolProject.Core.Features.Authentication.Commands
 {
     public class AuthenticationCommandHandler : ResponsesHandler,
         IRequestHandler<SignInCommand, Responses<JwtAuthResult>>,
-        IRequestHandler<RefreshTokenCommand, Responses<JwtAuthResult>>
+        IRequestHandler<RefreshTokenCommand, Responses<JwtAuthResult>>,
+        IRequestHandler<ConfirmEmailCommand, Responses<string>>
     {
         #region Fields
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
@@ -83,6 +84,21 @@ namespace SchoolProject.Core.Features.Authentication.Commands
             }
             var result = await _authenticationService.GetNewRefreshToken(user, jwtToken, expiryDate, request.RefreshToken);
             return Success(result);
+        }
+
+        public async Task<Responses<string>> Handle(ConfirmEmailCommand request, CancellationToken cancellationToken)
+        {
+            var confirmEmail = await _authenticationService.ConfirmEmailAsync(request.userId, request.Code);
+            switch (confirmEmail)
+            {
+                case "Invalid UserId Or Code":
+                    return UnprocessableEntity<string>(_stringLocalizer[SharedResourcesKeys.UnprocessableEntity]);
+                case "Error When Confirm Email":
+                    return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.BadRequest]);
+                default:
+                    return Success<string>(_stringLocalizer[SharedResourcesKeys.Success]);
+            }
+
         }
         #endregion
 
