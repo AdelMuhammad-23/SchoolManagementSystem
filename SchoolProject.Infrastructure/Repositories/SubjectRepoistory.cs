@@ -18,9 +18,14 @@ namespace SchoolProject.Infrastructure.Repositories
         {
             _subjects = dbContext.Set<Subject>();
         }
+
         #endregion
 
         #region Handel Functions
+        public async Task<List<Subject>> GetSubjectListAsync()
+        {
+            return await _subjects.ToListAsync();
+        }
         #endregion
     }
 }

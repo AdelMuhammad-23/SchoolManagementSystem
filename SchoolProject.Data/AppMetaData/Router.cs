@@ -17,6 +17,17 @@
             public const string Paginated = Prefix + "Paginated";
 
         }
+        public static class SubjectRouting
+        {
+            public const string Prefix = Rule + "Subject/";
+            public const string GetSubjectList = Prefix + "GetSubjectList";
+            public const string GetSubjectById = Prefix + "GetSubjectById/{id}";
+            public const string AddSubject = Prefix + "AddSubject";
+            public const string EditSubject = Prefix + "EditSubject";
+            public const string DeleteSubject = Prefix + "DeleteSubject/{id}";
+            public const string Paginated = Prefix + "Paginated";
+
+        }
         public static class EmailRouting
         {
             public const string Prefix = Rule + "EmailRouting/";
@@ -27,7 +38,9 @@
             public const string Prefix = Rule + "Department/";
             public const string List = Prefix + "List";
             public const string GetById = Prefix + "id";
-            public const string Create = Prefix + "Create";
+            public const string AddDepartment = Prefix + "AddDepartment";
+            public const string DeleteDepartment = Prefix + "DeleteDepartment/{id}";
+            public const string EditDepartment = Prefix + "EditDepartment";
             public const string Edit = Prefix + "Edit";
             public const string Delete = Prefix + "{id}";
             public const string Paginated = Prefix + "Paginated";
@@ -43,6 +56,8 @@
             public const string Delete = Prefix + "{id}";
             public const string Paginated = Prefix + "Paginated";
             public const string ChangePassword = Prefix + "ChangePassword";
+            public const string SendResetPassword = Prefix + "SendResetPassword";
+            public const string ConfirmResetPassword = Prefix + "ConfirmResetPassword";
 
         }
         public static class Authentication
@@ -55,6 +70,7 @@
             public const string Delete = Prefix + "{id}";
             public const string Paginated = Prefix + "Paginated";
             public const string ChangePassword = Prefix + "ChangePassword";
+            public const string ResetPassword = Prefix + "ResetPassword";
             public const string ConfirmEmail = "/Api/Authentication/ConfirmEmail";
 
 

@@ -48,21 +48,24 @@ namespace SchoolProject.Servies.Implementation
 
                 await _userManager.AddToRoleAsync(user, DefaultRoles.User);
 
-                //email Configurations
+                //Send Confirm Email
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                var contextAccessor = _contextAccessor.HttpContext.Request;
-                var returnUrl = contextAccessor.Scheme + "://" + contextAccessor.Host + _urlHelper.Action("ConfirmEmail", "Authentication", new { userId = user.Id, Code = code });
-                var sendEmailResult = await _emailServies.SendEmailAsync(user.Email, returnUrl);
+                var resquestAccessor = _contextAccessor.HttpContext.Request;
+                var returnUrl = resquestAccessor.Scheme + "://" + resquestAccessor.Host + _urlHelper.Action("ConfirmEmail", "Authentication", new { userId = user.Id, code = code });
+                var message = $"To Confirm Email Click Link: <a href='{returnUrl}'>Link Of Confirmation</a>";
+
+                //message or body
+                await _emailServies.SendEmailAsync(user.Email, message, "ConFirm Email");
 
                 await Transact.CommitAsync();
-                return ("Success");
+                return "Success";
             }
             catch (Exception ex)
             {
                 await Transact.RollbackAsync();
                 return "Failed";
-            }
 
+            }
         }
     }
 }

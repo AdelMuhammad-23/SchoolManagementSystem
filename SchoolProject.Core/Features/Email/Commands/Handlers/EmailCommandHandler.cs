@@ -29,7 +29,7 @@ namespace SchoolProject.Core.Features.Email.Commands.Handlers
         #region Handle Functions
         public async Task<Responses<string>> Handle(SendEmailCommand request, CancellationToken cancellationToken)
         {
-            var sendEmail = await _emailServies.SendEmailAsync(request.Email, request.Massage);
+            var sendEmail = await _emailServies.SendEmailAsync(request.Email, request.Massage, null);
             if (sendEmail == "Failed")
                 return BadRequest<string>("Failed");
 

@@ -42,8 +42,7 @@ namespace SchoolProject.Core.Features.Students.Commands.Handlers
         {
             var student = _mapper.Map<Student>(request);
             var result = await _studentServies.AddAsync(student);
-            return result == "Exist" ? UnprocessableEntity<string>("Name already exists") :
-                   result == "Success" ? Created("") :
+            return result == "Success" ? Created("") :
                                          BadRequest<string>();
         }
 

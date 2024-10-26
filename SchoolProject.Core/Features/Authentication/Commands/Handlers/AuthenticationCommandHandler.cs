@@ -13,7 +13,8 @@ namespace SchoolProject.Core.Features.Authentication.Commands
     public class AuthenticationCommandHandler : ResponsesHandler,
         IRequestHandler<SignInCommand, Responses<JwtAuthResult>>,
         IRequestHandler<RefreshTokenCommand, Responses<JwtAuthResult>>,
-        IRequestHandler<ConfirmEmailCommand, Responses<string>>
+        IRequestHandler<ConfirmEmailCommand, Responses<string>>,
+        IRequestHandler<ResetPasswordCommand, Responses<string>>
     {
         #region Fields
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
@@ -52,6 +53,9 @@ namespace SchoolProject.Core.Features.Authentication.Commands
             //if Failed Return Passord is wrong
             if (!signInResult.Succeeded) return BadRequest<JwtAuthResult>(_stringLocalizer[SharedResourcesKeys.PasswordIsNotCorrect]);
 
+            //email confirmed
+            if (!user.EmailConfirmed)
+                return BadRequest<JwtAuthResult>(_stringLocalizer[SharedResourcesKeys.EmailIsNotConfirmed]);
             //Generate Token
             var result = await _authenticationService.GetJwtToken(user);
             //return Token 
@@ -99,6 +103,20 @@ namespace SchoolProject.Core.Features.Authentication.Commands
                     return Success<string>(_stringLocalizer[SharedResourcesKeys.Success]);
             }
 
+        }
+
+        public async Task<Responses<string>> Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
+        {
+            var resetPassword = await _authenticationService.ResetPasswordAsync(request.Email, request.Password);
+            switch (resetPassword)
+            {
+                case "User is not found ":
+                    return NotFound<string>(_stringLocalizer[SharedResourcesKeys.UserIsNotFound]);
+                case "Failed":
+                    return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.BadRequest]);
+                default:
+                    return Success<string>(_stringLocalizer[SharedResourcesKeys.Success]);
+            }
         }
         #endregion
 

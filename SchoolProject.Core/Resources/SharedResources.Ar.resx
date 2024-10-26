@@ -225,4 +225,10 @@
   <data name="UserIsNotFound" xml:space="preserve">
     <value>هذا المستخدم غير موجود</value>
   </data>
+  <data name="EmailIsNotConfirmed" xml:space="preserve">
+    <value>يرجي تأكيد الايميل</value>
+  </data>
+  <data name="IsDepartmentExist" xml:space="preserve">
+    <value>هذا القسم موجود مسبقا</value>
+  </data>
 </root>

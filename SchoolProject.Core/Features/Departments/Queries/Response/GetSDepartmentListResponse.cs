@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.Features.Department.Queries.Response
+﻿namespace SchoolProject.Core.Features.Departments.Queries.Response
 {
     public class GetSDepartmentListResponse
     {

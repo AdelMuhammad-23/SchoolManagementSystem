@@ -2,6 +2,6 @@
 {
     public interface IEmailServies
     {
-        public Task<string> SendEmailAsync(string email, string massage);
+        public Task<string> SendEmailAsync(string email, string massage, string? reason);
     }
 }

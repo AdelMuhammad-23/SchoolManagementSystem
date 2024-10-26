@@ -1,4 +1,4 @@
-﻿using SchoolProject.Core.Features.Department.Queries.Response;
+﻿using SchoolProject.Core.Features.Departments.Queries.Response;
 using SchoolProject.Data.Entities;
 
 namespace SchoolProject.Core.Mapping.DepartmentMapping

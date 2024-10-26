@@ -2,15 +2,15 @@
 using MediatR;
 using Microsoft.Extensions.Localization;
 using SchoolProject.Core.Bases;
-using SchoolProject.Core.Features.Department.Queries.Models;
-using SchoolProject.Core.Features.Department.Queries.Response;
+using SchoolProject.Core.Features.Departments.Queries.Models;
+using SchoolProject.Core.Features.Departments.Queries.Response;
 using SchoolProject.Core.Resources;
 using SchoolProject.Core.Wrappers;
 using SchoolProject.Data.Entities;
 using SchoolProject.Servies.Abstructs;
 using System.Linq.Expressions;
 
-namespace SchoolProject.Core.Features.Department.Queries.Handlers
+namespace SchoolProject.Core.Features.Departments.Queries.Handlers
 {
     public class DepartmentQueryHandler : ResponsesHandler,
         IRequestHandler<GetDepartmentByIdQuery, Responses<GetSingleDepartmentResponse>>,
