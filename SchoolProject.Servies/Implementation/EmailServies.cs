@@ -20,7 +20,7 @@ namespace SchoolProject.Servies.Implementation
         #endregion
 
         #region Handle Functions
-        public async Task<string> SendEmailAsync(string email, string massage)
+        public async Task<string> SendEmailAsync(string email, string massage, string? reason)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace SchoolProject.Servies.Implementation
                     };
                     message.From.Add(new MailboxAddress("School Support", _emailSettings.FromEmail));
                     message.To.Add(new MailboxAddress("testing", email));
-                    message.Subject = "Verify your email address";
+                    message.Subject = reason == null ? "No reason summited" : reason;
                     await client.SendAsync(message);
 
                     await client.DisconnectAsync(true);

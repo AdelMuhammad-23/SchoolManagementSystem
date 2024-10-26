@@ -18,6 +18,7 @@
         public const string IsExist = "IsExist";
         public const string MaxLenghtis100 = "MaxLenghtis100";
         public const string IsDepartmentIdExist = "IsDepartmentIdExist";
+        public const string IsDepartmentExist = "IsDepartmentExist";
         public const string DepartmentId = "DepartmentId";
         public const string PasswordNotEqualConfirmPassword = "PasswordNotEqualConfirmPassword";
         public const string EmailIsExist = "EmailIsExist";
@@ -28,6 +29,8 @@
         public const string Password = "Password";
         public const string UserNameIsNotExist = "UserNameIsNotExist";
         public const string PasswordIsNotCorrect = "PasswordIsNotCorrect";
+
+        public const string EmailIsNotConfirmed = "EmailIsNotConfirmed";
 
         public const string AlgorithmsIsNotCorrect = "AlgorithmsIsNotCorrect";
         public const string TokenIsNotExpired = "TokenIsNotExpired";

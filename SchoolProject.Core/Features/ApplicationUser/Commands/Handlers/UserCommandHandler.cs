@@ -15,7 +15,8 @@ namespace SchoolProject.Core.Features.ApplicationUser.Commands.Handlers
         IRequestHandler<AddUserCommand, Responses<string>>,
         IRequestHandler<EditUserCommand, Responses<string>>,
         IRequestHandler<DeleteUserCommand, Responses<string>>,
-        IRequestHandler<ChangeUserPasswordCommand, Responses<string>>
+        IRequestHandler<ChangeUserPasswordCommand, Responses<string>>,
+        IRequestHandler<SendResetPasswordCommand, Responses<string>>
 
     {
         #region fields
@@ -24,19 +25,22 @@ namespace SchoolProject.Core.Features.ApplicationUser.Commands.Handlers
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
         private readonly RoleManager<Role> _identityRole;
         private readonly IApplicationUserServies _applicationUserServies;
+        private readonly IAuthenticationServies _authenticationServies;
         #endregion
         #region Constructors
         public UserCommandHandler(IStringLocalizer<SharedResources> stringLocalizer,
                                   IMapper mapper,
                                   UserManager<User> userManager,
                                   RoleManager<Role> identityRole,
-                                  IApplicationUserServies applicationUserServies) : base(stringLocalizer)
+                                  IApplicationUserServies applicationUserServies,
+                                  IAuthenticationServies authenticationServies) : base(stringLocalizer)
         {
             _stringLocalizer = stringLocalizer;
             _mapper = mapper;
             _userManager = userManager;
             _identityRole = identityRole;
             _applicationUserServies = applicationUserServies;
+            _authenticationServies = authenticationServies;
         }
 
 
@@ -53,8 +57,10 @@ namespace SchoolProject.Core.Features.ApplicationUser.Commands.Handlers
                 case "EmailIsExist": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.EmailIsExist]);
                 case "UserNameIsExist": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.UserNameIsExist]);
                 case "Failed": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FaildToAddUser]);
+                case "Success": return Success<string>(_stringLocalizer[SharedResourcesKeys.Success]);
+                default: return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.BadRequest]);
+
             }
-            return Success<string>(_stringLocalizer[SharedResourcesKeys.Success]);
         }
 
         public async Task<Responses<string>> Handle(EditUserCommand request, CancellationToken cancellationToken)
@@ -114,6 +120,23 @@ namespace SchoolProject.Core.Features.ApplicationUser.Commands.Handlers
 
 
 
+        }
+
+        public async Task<Responses<string>> Handle(SendResetPasswordCommand request, CancellationToken cancellationToken)
+        {
+            var sendCode = await _authenticationServies.SendResetPasswordCodeAsync(request.Email);
+            switch (sendCode)
+            {
+                case ("User Not Found"):
+                    return NotFound<string>(_stringLocalizer[SharedResourcesKeys.UserIsNotFound]);
+                case ("Error When send code to Email"):
+                    return BadRequest<string>("Error When send code to Email");
+                case ("Success"):
+                    return Success<string>(_stringLocalizer[SharedResourcesKeys.Success]);
+                default:
+                    return BadRequest<string>();
+
+            }
         }
         #endregion
 

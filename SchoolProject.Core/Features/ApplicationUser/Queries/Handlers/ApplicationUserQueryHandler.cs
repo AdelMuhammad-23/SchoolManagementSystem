@@ -8,29 +8,34 @@ using SchoolProject.Core.Features.ApplicationUser.Queries.Response;
 using SchoolProject.Core.Resources;
 using SchoolProject.Core.Wrappers;
 using SchoolProject.Data.Entities.Identity;
+using SchoolProject.Servies.Abstructs;
 
 namespace SchoolProject.Core.Features.ApplicationUser.Queries.Handlers
 {
     public class ApplicationUserQueryHandler : ResponsesHandler,
         IRequestHandler<GetUserPaginatedListQuery, PaginatedResult<GetUserPaginatedListResponse>>,
-        IRequestHandler<GetUserByIdQuery, Responses<GetUserByIdResponse>>
+        IRequestHandler<GetUserByIdQuery, Responses<GetUserByIdResponse>>,
+        IRequestHandler<ConfirmResetPasswordQuery, Responses<string>>
     {
 
         #region Fields
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
+        private readonly IAuthenticationServies _authenticationServies;
 
         #endregion
 
         #region
         public ApplicationUserQueryHandler(IStringLocalizer<SharedResources> stringLocalizer,
                                             IMapper mapper,
-                                            UserManager<User> userManager) : base(stringLocalizer)
+                                            UserManager<User> userManager,
+                                            IAuthenticationServies authenticationServies) : base(stringLocalizer)
         {
             _stringLocalizer = stringLocalizer;
             _mapper = mapper;
             _userManager = userManager;
+            _authenticationServies = authenticationServies;
         }
         #endregion
 
@@ -55,6 +60,24 @@ namespace SchoolProject.Core.Features.ApplicationUser.Queries.Handlers
 
             var userMapping = _mapper.Map<GetUserByIdResponse>(user);
             return Success(userMapping);
+        }
+
+        public async Task<Responses<string>> Handle(ConfirmResetPasswordQuery request, CancellationToken cancellationToken)
+        {
+            var resetPassword = await _authenticationServies.ConfirmResetPasswordAsync(request.Email, request.Code);
+            switch (resetPassword)
+            {
+                case ("User is not found "):
+                    return NotFound<string>(_stringLocalizer[SharedResourcesKeys.UserIsNotFound]);
+                case ("Invalid Code"):
+                    return BadRequest<string>("Invalid Code");
+                case ("Success"):
+                    return Success<string>(_stringLocalizer[SharedResourcesKeys.Success]);
+                default:
+                    return BadRequest<string>();
+
+            }
+            throw new NotImplementedException();
         }
 
 

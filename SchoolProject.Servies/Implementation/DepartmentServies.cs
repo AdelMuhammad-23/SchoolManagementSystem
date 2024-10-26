@@ -18,6 +18,29 @@ namespace SchoolProject.Servies.Implementation
             _departmentRepository = departmentRepository;
         }
 
+        public async Task<string> AddDepartmentAsync(Department department)
+        {
+            var addDepartment = await _departmentRepository.AddAsync(department);
+
+            return "Success";
+        }
+
+        public async Task<string> DeleteDepartmentAsync(Department department)
+        {
+            var trans = _departmentRepository.BeginTransaction();
+            try
+            {
+                await _departmentRepository.DeleteAsync(department);
+                await trans.CommitAsync();
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                await trans.RollbackAsync();
+                return "Failed";
+            }
+        }
+
 
         #endregion
         #region Handel Functions
@@ -44,6 +67,37 @@ namespace SchoolProject.Servies.Implementation
         {
             return await _departmentRepository.GetTableNoTracking().AnyAsync(x => x.DID.Equals(id));
 
+        }
+
+        public async Task<bool> IsDepartmentNameArabicIsExist(string departmentName)
+        {
+            return await _departmentRepository.GetTableAsTracking().AnyAsync(n => n.DNameAr.Equals(departmentName));
+        }
+        public async Task<bool> IsDepartmentNameEnglishIsExist(string departmentName)
+        {
+            return await _departmentRepository.GetTableAsTracking().AnyAsync(n => n.DNameEn.Equals(departmentName));
+        }
+
+        public async Task<bool> IsDepartmentNameEnglishIsExist(string departmentName, int id)
+        {
+
+            //Check if the name is Exist Or not
+            var student = await _departmentRepository.GetTableNoTracking().Where(x => x.DNameAr.Equals(departmentName) && !x.DID.Equals(id)).FirstOrDefaultAsync();
+            if (student == null) return false;
+            return true;
+        }
+
+        public async Task<bool> IsNameExistExcludeSelf(string departmentName, int id)
+        {
+            var department = await _departmentRepository.GetTableNoTracking().Where(x => x.DNameEn.Equals(departmentName) && !x.DID.Equals(id)).FirstOrDefaultAsync();
+            if (department == null) return false;
+            return true;
+        }
+
+        public async Task<string> updateDepartmentAsync(Department department)
+        {
+            await _departmentRepository.UpdateAsync(department);
+            return "Success";
         }
         #endregion
 

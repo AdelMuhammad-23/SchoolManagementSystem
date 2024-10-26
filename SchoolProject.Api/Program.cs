@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using SchoolProject.Core;
+using SchoolProject.Core.Filters;
 using SchoolProject.Core.MiddleWare;
 using SchoolProject.Data.Entities.Identity;
 using SchoolProject.Infrastructure;
@@ -80,6 +81,11 @@ builder.Services.AddCors(options =>
                       });
 });
 #endregion
+
+#region Filters
+builder.Services.AddTransient<AuthFilter>();
+#endregion
+
 
 builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 builder.Services.AddTransient<IUrlHelper>(x =>

@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 
 namespace SchoolProject.Core.Mapping.SubjectMapping
 {
-    internal class SubjectProfile
+    public partial class SubjectProfile : Profile
     {
+        public SubjectProfile()
+        {
+            GetSubjectListMapping();
+            AddSubjectMapping();
+            GetSubjectByIdMapping();
+            EditSubjectMapping();
+        }
     }
 }

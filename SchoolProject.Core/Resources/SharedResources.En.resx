@@ -163,7 +163,7 @@
     <value>There are validation errors or syntax errors</value>
   </data>
   <data name="IsDepartmentIdExist" xml:space="preserve">
-    <value>Is not Exist</value>
+    <value>Is Department Id not Exist</value>
   </data>
   <data name="DepartmentId" xml:space="preserve">
     <value>Department Id</value>
@@ -224,5 +224,11 @@
   </data>
   <data name="UserIsNotFound" xml:space="preserve">
     <value>User Is Not Found</value>
+  </data>
+  <data name="EmailIsNotConfirmed" xml:space="preserve">
+    <value>Email Is Not Confirmed</value>
+  </data>
+  <data name="IsDepartmentExist" xml:space="preserve">
+    <value>Is Department Exist</value>
   </data>
 </root>

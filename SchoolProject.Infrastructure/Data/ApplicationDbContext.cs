@@ -15,8 +15,8 @@ namespace SchoolProject.Infrastructure.Data
         }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-
         }
+
         // Models in DataBase
         public DbSet<User> Users { get; set; }
         public DbSet<Student> students { get; set; }
@@ -29,6 +29,7 @@ namespace SchoolProject.Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
         }
 
     }
