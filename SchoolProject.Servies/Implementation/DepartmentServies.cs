@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolProject.Data.Entities;
+using SchoolProject.Data.Entities.Procedures;
 using SchoolProject.Data.Entities.Views;
 using SchoolProject.Infrastructure.Abstracts;
+using SchoolProject.Infrastructure.Abstracts.Procedures;
 using SchoolProject.Infrastructure.Abstracts.Veiws;
 using SchoolProject.Servies.Abstructs;
 
@@ -11,16 +13,19 @@ namespace SchoolProject.Servies.Implementation
     {
 
         #region Fields
-        public readonly IDepartmentRepository _departmentRepository;
-        public readonly IViewDepartmentRepository<ViewDepartment> _viewDepartmentRepository;
+        private readonly IDepartmentRepository _departmentRepository;
+        private readonly IViewDepartmentRepository<ViewDepartment> _viewDepartmentRepository;
+        private readonly IDepartmentStudentCountProcRepository _departmentStudentCountProcRepository;
         #endregion
 
         #region Constructor
         public DepartmentServies(IDepartmentRepository departmentRepository,
-                                IViewDepartmentRepository<ViewDepartment> viewDepartmentRepository)
+                                IViewDepartmentRepository<ViewDepartment> viewDepartmentRepository,
+                                IDepartmentStudentCountProcRepository departmentStudentCountProcRepository)
         {
             _departmentRepository = departmentRepository;
             _viewDepartmentRepository = viewDepartmentRepository;
+            _departmentStudentCountProcRepository = departmentStudentCountProcRepository;
         }
 
         public async Task<string> AddDepartmentAsync(Department department)
@@ -67,6 +72,11 @@ namespace SchoolProject.Servies.Implementation
             return department;
 
 
+        }
+
+        public async Task<IReadOnlyList<DepartmentStudentCountProc>> GetDepartmentStudentCountProcsDataAsync(DepartmentStudentCountProcParameter parameter)
+        {
+            return await _departmentStudentCountProcRepository.GetDepartmentStudentCountProcsDataAsync(parameter);
         }
 
         public async Task<List<ViewDepartment>> GetViewDepartmentDataAsync()

@@ -7,6 +7,7 @@ using SchoolProject.Core.Features.Departments.Queries.Response;
 using SchoolProject.Core.Resources;
 using SchoolProject.Core.Wrappers;
 using SchoolProject.Data.Entities;
+using SchoolProject.Data.Entities.Procedures;
 using SchoolProject.Servies.Abstructs;
 using System.Linq.Expressions;
 
@@ -15,7 +16,8 @@ namespace SchoolProject.Core.Features.Departments.Queries.Handlers
     public class DepartmentQueryHandler : ResponsesHandler,
         IRequestHandler<GetDepartmentByIdQuery, Responses<GetSingleDepartmentResponse>>,
         IRequestHandler<GetSDepartmentListQuery, Responses<List<GetSDepartmentListResponse>>>,
-        IRequestHandler<GetDepartmentStudentCount, Responses<List<GetDepartmentStudentCountResponse>>>
+        IRequestHandler<GetDepartmentStudentCount, Responses<List<GetDepartmentStudentCountResponse>>>,
+        IRequestHandler<GetDepartmentListStudentById, Responses<GetDepartmentListStudentByIdResponse>>
 
 
     {
@@ -80,6 +82,14 @@ namespace SchoolProject.Core.Features.Departments.Queries.Handlers
             //    return NotFound<List<GetDepartmentStudentCountResponse>>("");
 
             return Success(viewMapping);
+        }
+
+        public async Task<Responses<GetDepartmentListStudentByIdResponse>> Handle(GetDepartmentListStudentById request, CancellationToken cancellationToken)
+        {
+            var parameterMapping = _mapper.Map<DepartmentStudentCountProcParameter>(request);
+            var procResult = await _departmentServies.GetDepartmentStudentCountProcsDataAsync(parameterMapping);
+            var result = _mapper.Map<GetDepartmentListStudentByIdResponse>(procResult.FirstOrDefault());
+            return Success(result);
         }
 
         #endregion
