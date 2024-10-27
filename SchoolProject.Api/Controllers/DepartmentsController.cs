@@ -27,6 +27,14 @@ namespace SchoolProject.Api.Controllers
             var result = await Mediator.Send(query);
             return NewResult(result);
         }
+        [SwaggerOperation(summary: " الأقسام مع عدد الطلاب باستخدام الاجراء", OperationId = "GetListDepartmentStudentCountWithProc")]
+        [HttpGet(Router.DepartmentRouting.GetListDepartmentStudentCountWithProc)]
+        public async Task<IActionResult> GetListDepartmentStudentCountWithProc([FromRoute] int id)
+        {
+            var query = new GetDepartmentListStudentById(id);
+            var result = await Mediator.Send(query);
+            return NewResult(result);
+        }
 
         [SwaggerOperation(summary: "id القسم عن طريق ال", OperationId = "CreateRole")]
         [HttpGet(Router.DepartmentRouting.GetById)]

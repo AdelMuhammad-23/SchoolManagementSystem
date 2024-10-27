@@ -1,4 +1,5 @@
 ﻿using SchoolProject.Data.Entities;
+using SchoolProject.Data.Entities.Procedures;
 using SchoolProject.Data.Entities.Views;
 
 namespace SchoolProject.Servies.Abstructs
@@ -16,5 +17,7 @@ namespace SchoolProject.Servies.Abstructs
         public Task<bool> IsDepartmentNameEnglishIsExist(string departmentName);
         public Task<bool> IsDepartmentNameEnglishIsExist(string departmentName, int id);
         public Task<bool> IsNameExistExcludeSelf(string departmentName, int id);
+        public Task<IReadOnlyList<DepartmentStudentCountProc>> GetDepartmentStudentCountProcsDataAsync(DepartmentStudentCountProcParameter parameter);
+
     }
 }

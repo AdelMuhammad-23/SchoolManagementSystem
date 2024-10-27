@@ -38,6 +38,7 @@
             public const string Prefix = Rule + "Department/";
             public const string List = Prefix + "List";
             public const string GetListDepartmentStudentCount = Prefix + "GetListDepartmentStudentCount";
+            public const string GetListDepartmentStudentCountWithProc = Prefix + "GetListDepartmentStudentCountWithProc/{id}";
             public const string GetById = Prefix + "id";
             public const string AddDepartment = Prefix + "AddDepartment";
             public const string DeleteDepartment = Prefix + "DeleteDepartment/{id}";
