@@ -92,15 +92,7 @@ namespace SchoolProject.Core.Features.Departments.Queries.Handlers
             return Success(result);
         }
 
-        public async Task<Responses<List<GetDepartmentStudentCountResponse>>> Handle(GetDepartmentStudentCount request, CancellationToken cancellationToken)
-        {
-            var ViewDepartmentStudentCount = await _departmentServies.GetViewDepartmentDataAsync();
-            var viewMapping = _mapper.Map<List<GetDepartmentStudentCountResponse>>(ViewDepartmentStudentCount);
-            //if (viewMapping == null)
-            //    return NotFound<List<GetDepartmentStudentCountResponse>>("");
 
-            return Success(viewMapping);
-        }
 
         #endregion
 
