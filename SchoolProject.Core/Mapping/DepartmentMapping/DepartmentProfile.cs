@@ -10,6 +10,7 @@ namespace SchoolProject.Core.Mapping.DepartmentMapping
             GetSingleDepartmentMapping();
             AddDepartmentMapping();
             EditDepartmentMapping();
+            GetDepartmentStudentCountMapping();
         }
     }
 }

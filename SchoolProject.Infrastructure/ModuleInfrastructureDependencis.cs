@@ -1,7 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SchoolProject.Data.Entities.Views;
 using SchoolProject.Infrastructure.Abstracts;
+using SchoolProject.Infrastructure.Abstracts.Veiws;
 using SchoolProject.Infrastructure.InfrastructureBases;
 using SchoolProject.Infrastructure.Repositories;
+using SchoolProject.Infrastructure.Repositories.Views;
 
 namespace SchoolProject.Infrastructure
 {
@@ -17,7 +20,8 @@ namespace SchoolProject.Infrastructure
             services.AddTransient<IUserRefreshTokenRepository, UserRefreshTokenRepository>();
             services.AddTransient(typeof(IGenericRepositoryAsync<>), typeof(GenericRepositoryAsync<>));
 
-
+            //Views
+            services.AddTransient<IViewDepartmentRepository<ViewDepartment>, ViewDepartmentRepository>();
             return services;
         }
     }
