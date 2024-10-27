@@ -1,10 +1,12 @@
 ﻿using SchoolProject.Data.Entities;
+using SchoolProject.Data.Entities.Views;
 
 namespace SchoolProject.Servies.Abstructs
 {
     public interface IDepartmentServies
     {
         public Task<List<Department>> GetDepartmentAsync();
+        public Task<List<ViewDepartment>> GetViewDepartmentDataAsync();
         public Task<Department> GetDepartmentByIdAsync(int id);
         public Task<string> AddDepartmentAsync(Department department);
         public Task<string> DeleteDepartmentAsync(Department department);
@@ -14,7 +16,5 @@ namespace SchoolProject.Servies.Abstructs
         public Task<bool> IsDepartmentNameEnglishIsExist(string departmentName);
         public Task<bool> IsDepartmentNameEnglishIsExist(string departmentName, int id);
         public Task<bool> IsNameExistExcludeSelf(string departmentName, int id);
-
-
     }
 }

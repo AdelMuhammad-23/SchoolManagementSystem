@@ -14,7 +14,8 @@ namespace SchoolProject.Core.Features.Departments.Queries.Handlers
 {
     public class DepartmentQueryHandler : ResponsesHandler,
         IRequestHandler<GetDepartmentByIdQuery, Responses<GetSingleDepartmentResponse>>,
-        IRequestHandler<GetSDepartmentListQuery, Responses<List<GetSDepartmentListResponse>>>
+        IRequestHandler<GetSDepartmentListQuery, Responses<List<GetSDepartmentListResponse>>>,
+        IRequestHandler<GetDepartmentStudentCount, Responses<List<GetDepartmentStudentCountResponse>>>
 
 
     {
@@ -69,6 +70,16 @@ namespace SchoolProject.Core.Features.Departments.Queries.Handlers
             //return response
             return Success(departmentMapping);
 
+        }
+
+        public async Task<Responses<List<GetDepartmentStudentCountResponse>>> Handle(GetDepartmentStudentCount request, CancellationToken cancellationToken)
+        {
+            var ViewDepartmentStudentCount = await _departmentServies.GetViewDepartmentDataAsync();
+            var viewMapping = _mapper.Map<List<GetDepartmentStudentCountResponse>>(ViewDepartmentStudentCount);
+            //if (viewMapping == null)
+            //    return NotFound<List<GetDepartmentStudentCountResponse>>("");
+
+            return Success(viewMapping);
         }
 
         #endregion

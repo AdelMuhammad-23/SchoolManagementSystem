@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SchoolProject.Data.Entities;
 using SchoolProject.Data.Entities.Identity;
+using SchoolProject.Data.Entities.Views;
 using System.Reflection;
 
 namespace SchoolProject.Infrastructure.Data
@@ -25,6 +26,8 @@ namespace SchoolProject.Infrastructure.Data
         public DbSet<Subject> subjects { get; set; }
         public DbSet<SubjectStudent> subjectsStudents { get; set; }
         public DbSet<UserRefreshToken> UserRefreshToken { get; set; }
+        //Views
+        public DbSet<ViewDepartment> ViewDepartment { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
