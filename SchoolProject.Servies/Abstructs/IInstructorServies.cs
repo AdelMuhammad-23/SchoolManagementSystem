@@ -2,5 +2,7 @@
 {
     public interface IInstructorServies
     {
+        public Task<decimal> GetSalarySummationOfInstructor();
+
     }
 }

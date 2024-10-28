@@ -30,8 +30,6 @@
     <Folder Include="Features\Instructors\Commands\Handlers\" />
     <Folder Include="Features\Instructors\Commands\Models\" />
     <Folder Include="Features\Instructors\Commands\Validatiors\" />
-    <Folder Include="Features\Instructors\Queries\Handlers\" />
-    <Folder Include="Features\Instructors\Queries\Models\" />
     <Folder Include="Features\Instructors\Queries\Response\" />
     <Folder Include="Mapping\AuthorizationMapping\CommandMapping\" />
     <Folder Include="Mapping\InstructorMapping\CommandMapping\" />

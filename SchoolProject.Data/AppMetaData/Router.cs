@@ -92,5 +92,10 @@
             public const string GetManagerUserRole = Prefix + "GetManagerUserRole/{id}";
 
         }
+        public static class InstructorRouting
+        {
+            public const string Prefix = Rule + "InstructorRouting";
+            public const string GetSalarySummationOfInstructor = Prefix + "/SalarySummationOfInstructor";
+        }
     }
 }
