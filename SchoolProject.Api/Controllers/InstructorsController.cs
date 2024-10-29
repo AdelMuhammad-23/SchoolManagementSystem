@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SchoolProject.Api.Base;
+using SchoolProject.Core.Features.Instructors.Commands.Models;
 using SchoolProject.Core.Features.Instructors.Queries.Models;
 using SchoolProject.Data.AppMetaData;
 using Swashbuckle.AspNetCore.Annotations;
@@ -21,6 +22,12 @@ namespace SchoolProject.Api.Controllers
         public async Task<IActionResult> GetInstructorList()
         {
             return NewResult(await Mediator.Send(new GetInstructorListQuery()));
+        }
+        [SwaggerOperation(summary: "حذف مدرس", OperationId = "DeleteInstructor")]
+        [HttpDelete(Router.InstructorRouting.DeleteInstructor)]
+        public async Task<IActionResult> DeleteInstructor([FromRoute] int id)
+        {
+            return NewResult(await Mediator.Send(new DeleteInstructorCommand(id)));
         }
     }
 }
