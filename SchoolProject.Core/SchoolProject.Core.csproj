@@ -27,8 +27,6 @@
     <Folder Include="Features\Email\Queries\Handlers\" />
     <Folder Include="Features\Email\Queries\Models\" />
     <Folder Include="Features\Email\Queries\Response\" />
-    <Folder Include="Features\Instructors\Commands\Handlers\" />
-    <Folder Include="Features\Instructors\Commands\Models\" />
     <Folder Include="Features\Instructors\Commands\Validatiors\" />
     <Folder Include="Mapping\AuthorizationMapping\CommandMapping\" />
     <Folder Include="Mapping\InstructorMapping\CommandMapping\" />

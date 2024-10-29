@@ -97,6 +97,7 @@
             public const string Prefix = Rule + "InstructorRouting";
             public const string GetSalarySummationOfInstructor = Prefix + "/SalarySummationOfInstructor";
             public const string GetInstructorList = Prefix + "/GetInstructorList";
+            public const string DeleteInstructor = Prefix + "/DeleteInstructor/{id}";
         }
     }
 }
