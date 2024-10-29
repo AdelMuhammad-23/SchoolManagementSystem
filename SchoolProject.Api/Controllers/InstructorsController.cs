@@ -16,5 +16,11 @@ namespace SchoolProject.Api.Controllers
         {
             return NewResult(await Mediator.Send(new GetSummationSalaryOfInstructorQuery()));
         }
+        [SwaggerOperation(summary: "قائمة المدرسين", OperationId = "GetInstructorListQuery")]
+        [HttpGet(Router.InstructorRouting.GetInstructorList)]
+        public async Task<IActionResult> GetInstructorList()
+        {
+            return NewResult(await Mediator.Send(new GetInstructorListQuery()));
+        }
     }
 }

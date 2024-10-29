@@ -17,9 +17,16 @@ namespace SchoolProject.Infrastructure.Repositories
         {
             _instructors = dbContext.Set<Instructor>();
         }
+
+
         #endregion
 
         #region Handel Functions
+        public async Task<List<Instructor>> GetInstructorListAsync()
+        {
+            var instructors = await _instructors.ToListAsync();
+            return instructors;
+        }
         #endregion
 
     }
