@@ -27,4 +27,8 @@
     <ProjectReference Include="..\SchoolProject.Servies\SchoolProject.Servies.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>
