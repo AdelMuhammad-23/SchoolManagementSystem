@@ -119,6 +119,32 @@ namespace SchoolProject.Servies.Implementation
             if (student == null) return false;
             return true;
         }
+
+        public async Task<string> UpdateInstructor(Instructor instructor, IFormFile instructorImage)
+        {
+
+            if (instructorImage != null)
+            {
+                var context = _contextAccessor.HttpContext.Request;
+                var baseUrl = context.Scheme + "://" + context.Host;
+                var imageUrl = await _fileServies.UploadImage("Instructors", instructorImage);
+                await _fileServies.UploadImage("Instructors", instructorImage);
+                switch (imageUrl)
+                {
+                    case "this extension is not allowed":
+                        return "this extension is not allowed";
+                    case "this image is too big":
+                        return "this image is too big";
+                    case "FailedToUploadImage":
+                        return "FailedToUploadImage";
+                }
+                instructor.Image = baseUrl + imageUrl;
+
+            }
+
+            await _instructorRepository.UpdateAsync(instructor);
+            return "Success";
+        }
         #endregion
     }
 }

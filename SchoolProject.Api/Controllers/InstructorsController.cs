@@ -36,5 +36,12 @@ namespace SchoolProject.Api.Controllers
 
             return NewResult(await Mediator.Send(command));
         }
+        [SwaggerOperation(summary: "تعديل مدرس", OperationId = "UpdateInstructor")]
+        [HttpPut(Router.InstructorRouting.UpdateInstructor)]
+        public async Task<IActionResult> Edit([FromForm] UpdateInstructorCommand command)
+        {
+            var response = await Mediator.Send(command);
+            return NewResult(response);
+        }
     }
 }

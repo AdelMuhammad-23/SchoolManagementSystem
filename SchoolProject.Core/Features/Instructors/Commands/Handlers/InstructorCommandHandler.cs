@@ -11,7 +11,8 @@ namespace SchoolProject.Core.Features.Instructors.Commands.Handlers
 {
     internal class InstructorCommandHandler : ResponsesHandler,
                    IRequestHandler<DeleteInstructorCommand, Responses<string>>,
-                   IRequestHandler<AddInstructorCommand, Responses<string>>
+                   IRequestHandler<AddInstructorCommand, Responses<string>>,
+                   IRequestHandler<UpdateInstructorCommand, Responses<string>>
     {
 
         #region Fileds
@@ -58,6 +59,27 @@ namespace SchoolProject.Core.Features.Instructors.Commands.Handlers
             return Success("");
         }
 
+        public async Task<Responses<string>> Handle(UpdateInstructorCommand request, CancellationToken cancellationToken)
+        {
+            var instructor = await _instructorService.GetInstructorById(request.Id);
+            if (instructor == null)
+                return NotFound<string>("Instructor Not Found");
+            //mapping Between request and student
+            var instructorMapper = _mapper.Map(request, instructor);
+            //Call service that make Edit
+            var result = await _instructorService.UpdateInstructor(instructorMapper, request.Image);
+            //return response
+            switch (result)
+            {
+                case "this extension is not allowed":
+                    return BadRequest<string>("this extension is not allowed");
+                case "this image is too big":
+                    return BadRequest<string>("this image is too big");
+                case "FailedToUploadImage":
+                    return BadRequest<string>("FailedToUploadImage");
+            }
+            return Success("");
+        }
         #endregion
     }
 }

@@ -9,6 +9,7 @@ namespace SchoolProject.Servies.Abstructs
         public Task<List<Instructor>> GetAllInstructors();
         public Task<Instructor> GetInstructorById(int id);
         public Task<string> DeleteInstructor(Instructor instructor);
+        public Task<string> UpdateInstructor(Instructor instructor, IFormFile instructorImage);
         public Task<string> AddInstructor(Instructor instructor, IFormFile instructorImage);
         public Task<bool> IsNameArExist(string nameAr);
         public Task<bool> IsNameEnExist(string nameEn);
