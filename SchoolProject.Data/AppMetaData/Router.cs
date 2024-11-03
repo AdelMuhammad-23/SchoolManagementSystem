@@ -99,6 +99,7 @@
             public const string GetInstructorList = Prefix + "/GetInstructorList";
             public const string DeleteInstructor = Prefix + "/DeleteInstructor/{id}";
             public const string AddInstructor = Prefix + "/AddInstructor";
+            public const string UpdateInstructor = Prefix + "/UpdateInstructor";
         }
     }
 }

@@ -8,6 +8,7 @@ namespace SchoolProject.Core.Mapping.InstructorMapping
         {
             GetInstructorListMapping();
             AddInstructorMapping();
+            AddInstructorMapping();
         }
     }
 }
