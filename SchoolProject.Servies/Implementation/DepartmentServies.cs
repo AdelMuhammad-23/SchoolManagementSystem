@@ -37,18 +37,18 @@ namespace SchoolProject.Servies.Implementation
 
         public async Task<string> DeleteDepartmentAsync(Department department)
         {
-            var trans = _departmentRepository.BeginTransaction();
-            try
-            {
-                await _departmentRepository.DeleteAsync(department);
-                await trans.CommitAsync();
-                return "Success";
-            }
-            catch (Exception ex)
-            {
-                await trans.RollbackAsync();
-                return "Failed";
-            }
+            //var trans = _departmentRepository.BeginTransaction();
+            //try
+            //{
+            await _departmentRepository.DeleteAsync(department);
+            //    await trans.CommitAsync();
+            return "Success";
+            //}
+            //catch (Exception ex)
+            //{
+            //    await trans.RollbackAsync();
+            //    return "Failed";
+            //}
         }
 
 

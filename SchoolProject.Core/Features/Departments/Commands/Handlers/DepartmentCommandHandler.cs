@@ -46,7 +46,11 @@ namespace SchoolProject.Core.Features.Departments.Commands.Handlers
             //Check if the Id is Exist Or not
             var department = await _departmentServies.GetDepartmentByIdAsync(request.Id);
             //return NotFound
-            if (department == null) return NotFound<string>();
+            //if (department == null)
+            //{
+            //    Log.Error("This Department is not found");
+            //    return NotFound<string>();
+            //}
             //Call service that make Delete
             var result = await _departmentServies.DeleteDepartmentAsync(department);
             if (result == "Success") return Deleted<string>("Deleted is Done");
