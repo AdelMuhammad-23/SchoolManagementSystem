@@ -13,6 +13,7 @@ using SchoolProject.Infrastructure;
 using SchoolProject.Infrastructure.Data;
 using SchoolProject.Infrastructure.Seeder;
 using SchoolProject.Servies;
+using Serilog;
 using System.Globalization;
 
 
@@ -94,6 +95,13 @@ builder.Services.AddTransient<IUrlHelper>(x =>
     var factory = x.GetRequiredService<IUrlHelperFactory>();
     return factory.GetUrlHelper(actionContext);
 });
+
+
+//Serilog
+Log.Logger = new LoggerConfiguration()
+              .ReadFrom.Configuration(builder.Configuration).CreateLogger();
+builder.Services.AddSerilog();
+
 var app = builder.Build();
 
 
