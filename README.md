@@ -54,7 +54,7 @@ SchoolProject is a web API developed using **ASP.NET Core** and **Clean Architec
 ## **Setup Instructions**
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/username/SchoolProject.git
+   git clone https://github.com/AdelMuhammad-23/SchoolManagementSystem.git
    cd SchoolProject
    ```
 2. Set up the database connection in `appsettings.json`.
@@ -66,7 +66,6 @@ SchoolProject is a web API developed using **ASP.NET Core** and **Clean Architec
    ```bash
    dotnet run
    ```
-5. Access the API documentation at: `http://localhost:5000/swagger`.
 
 ---
 
